@@ -12,8 +12,9 @@ class UsersController < ApplicationController
             render json: user, status: 201
         else
             render json: { error: "Invalid Username or Password" }, status: 401
+        end
     end
-    
+
     private
 
     def user_params

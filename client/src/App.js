@@ -1,23 +1,31 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
 function App() {
+  const [user, setUser] = useState("")
+  const [password, setPassword] = useState("")
+
+  function handleLogin(e) {
+    e.preventDefault()
+    const newUser = {username: user, password: password}
+    fetch("/users", {
+      method: "POST", 
+      headers: {
+        "Content-Type" : "application/json"
+      }, 
+      body: JSON.stringify(newUser)
+    })
+    .then(r => r.json())
+    .then(data => console.log(data))
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <form onSubmit={handleLogin}>
+      <input type="text" onChange={e => setUser(e.target.value)}/>
+      <input type="password" onChange={e => setPassword(e.target.value)}/>
+      <button>login</button>
+     </form>
     </div>
   );
 }
