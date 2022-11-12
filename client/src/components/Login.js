@@ -31,7 +31,7 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignIn() {
+export default function Login({ setUser, user }) {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState([])
@@ -49,12 +49,15 @@ export default function SignIn() {
     })
     .then(r => {
         if (r.ok) {
-            r.json().then(navigate("/user/home"))
+            r.json().then(user => setUser(user))
+            navigate("/user/home")
         } else {
             r.json().then(e => setError(e.error))
         }
     })
   };
+
+  console.log(user)
 
   return (
     <ThemeProvider theme={theme}>
