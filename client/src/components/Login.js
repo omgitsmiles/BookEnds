@@ -7,7 +7,8 @@ import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-// import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -19,8 +20,8 @@ function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      <Link color="inherit" href="https://github.com/omgitsmiles">
+        omgitsmiles
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -31,6 +32,9 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignIn() {
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
+    const [error, setError] = useState([])
     let navigate = useNavigate();
 
   const handleSubmit = (event) => {
@@ -47,16 +51,13 @@ export default function SignIn() {
         if (r.ok) {
             r.json().then(navigate("/home"))
         } else {
-            r.json().then(e => console.log(e.error))
+            r.json().then(e => setError(e.error))
         }
     })
   };
 
-  const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("")
+ 
 
-
-  console.log(username, password)
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -70,7 +71,6 @@ export default function SignIn() {
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            {/* <LockOutlinedIcon /> */}
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign in
@@ -97,7 +97,15 @@ export default function SignIn() {
               id="password"
               autoComplete="current-password"
               onChange={e => setPassword(e.target.value)}
-            />
+            />{error.length > 0 ? (
+                <Alert severity="error">
+                <AlertTitle>Error</AlertTitle>
+               {error.map(err => (
+                     <strong key={err}>{err}</strong>
+                ))}
+                </Alert>
+            ): null}
+            
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
@@ -111,13 +119,13 @@ export default function SignIn() {
               Sign In
             </Button>
             <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
+              {/* <Grid item xs> */}
+                {/* <Link href="#" variant="body2">
                   Forgot password?
-                </Link>
-              </Grid>
+                </Link> */}
+              {/* </Grid> */}
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/user/new" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

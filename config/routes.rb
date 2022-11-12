@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   # resources :books
   # resources :users
 
-  post '/users', to: 'users#create'
+  post '/signup', to: 'users#create'
 
   post '/login', to: 'sessions#create'
   # Routing logic: fallback requests for React Router.
