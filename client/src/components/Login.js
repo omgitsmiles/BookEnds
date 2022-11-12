@@ -57,7 +57,7 @@ export default function Login({ setUser, user }) {
     })
   };
 
-  console.log(user)
+console.log(user)
 
   return (
     <ThemeProvider theme={theme}>

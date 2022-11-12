@@ -1,5 +1,4 @@
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -9,10 +8,8 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Paolo from '../assets/Paolo.jpeg'
 import { Link } from 'react-router-dom'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -38,16 +35,6 @@ export default function Album() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <nav>
-      <AppBar className="navBar" position="relative" sx={{ bgcolor: "BurlyWood" }}>
-        <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap>
-            BookEnds
-          </Typography>
-        </Toolbar>
-        <Link to="/login"><Avatar src="/broken-image.jpg" /></Link>
-      </AppBar>
-      </nav>
       <main>
         {/* Hero unit */}
         <Box
