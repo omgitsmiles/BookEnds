@@ -10,4 +10,13 @@ class SessionsController < ApplicationController
         end
     end
 
+    def destroy
+        if session[:user_id]
+            session.delete :user_id
+            head :no_content
+        else
+            render json: { error: ["Not authorized"] }, status: 401
+        end
+    end
+
 end

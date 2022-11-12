@@ -49,14 +49,12 @@ export default function SignIn() {
     })
     .then(r => {
         if (r.ok) {
-            r.json().then(navigate("/home"))
+            r.json().then(navigate("/user/home"))
         } else {
             r.json().then(e => setError(e.error))
         }
     })
   };
-
- 
 
   return (
     <ThemeProvider theme={theme}>
@@ -97,14 +95,15 @@ export default function SignIn() {
               id="password"
               autoComplete="current-password"
               onChange={e => setPassword(e.target.value)}
-            />{error.length > 0 ? (
+            />
+            {error.length > 0 ? (
                 <Alert severity="error">
                 <AlertTitle>Error</AlertTitle>
                {error.map(err => (
                      <strong key={err}>{err}</strong>
                 ))}
                 </Alert>
-            ): null}
+            ) : null}
             
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}

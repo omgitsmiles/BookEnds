@@ -8,7 +8,9 @@ import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+import { useNavigate } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -31,12 +33,15 @@ const theme = createTheme();
 export default function SignUp() {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
+    const [quote, setQuote] = useState("")
     const [password, setPassword] = useState("")
-    const [l]
+    const [errorsMsg, setErrorsMsg] = useState([])
+    const [user, setUser] = useState(null)
+    let navigate = useNavigate()
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const newUser = {username: name, email: email, password: password}
+    const newUser = {username: name, email: email, quote: quote, password: password}
     fetch("/signup", {
         method: "POST",
         headers: {
@@ -46,10 +51,13 @@ export default function SignUp() {
     })
     .then(r => {
         if (r.ok) {
-            r.json().then()
+            r.json().then(nUser => setUser(nUser))
+            navigate("/user/home")
+            } else {
+            r.json().then(err => setErrorsMsg(err))
             }
-    })
-  };
+        })
+    };
 
   return (
     <ThemeProvider theme={theme}>
@@ -72,13 +80,14 @@ export default function SignUp() {
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  autoComplete="given-name"
-                  name="name"
+                  autoComplete="userName"
+                  name="userName"
                   required
                   fullWidth
-                  id="name"
-                  label="Name"
+                  id="userName"
+                  label="Username"
                   autoFocus
+                  onChange={e => setName(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -89,6 +98,7 @@ export default function SignUp() {
                   label="Email"
                   name="Email"
                   autoComplete="email"
+                  onChange={e => setEmail(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -99,6 +109,7 @@ export default function SignUp() {
                   label="Favorite Book quote"
                   name="quote"
                   autoComplete="Favorite Book Quote"
+                  onChange={e => setQuote(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -110,7 +121,16 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  onChange={e => setPassword(e.target.value)}
                 />
+                {errorsMsg.errors ? ( 
+                    <Alert severity="error">
+                    <AlertTitle>Error</AlertTitle>
+                    {errorsMsg.errors.map(error => (
+                     <strong key={error}><div>{error}</div></strong>
+                    ))}
+                    </Alert>
+                ): null}
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
