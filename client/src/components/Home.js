@@ -12,7 +12,9 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import Link from '@mui/material/Link';
+import Avatar from '@mui/material/Avatar';
+import Paolo from '../assets/Paolo.jpeg'
+import { Link } from 'react-router-dom'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 function Copyright() {
@@ -36,13 +38,16 @@ export default function Album() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <AppBar position="relative" sx={{ bgcolor: "BurlyWood" }}>
+      <nav>
+      <AppBar className="navBar" position="relative" sx={{ bgcolor: "BurlyWood" }}>
         <Toolbar>
           <Typography variant="h6" color="inherit" noWrap>
             BookEnds
           </Typography>
         </Toolbar>
+        <Link to="/login"><Avatar src="/broken-image.jpg" /></Link>
       </AppBar>
+      </nav>
       <main>
         {/* Hero unit */}
         <Box

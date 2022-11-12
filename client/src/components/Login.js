@@ -12,6 +12,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'
 
 function Copyright(props) {
 
@@ -30,18 +31,25 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignIn() {
+    let navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const user = {username: username, }
-    fetch("http://localhost:3000/login", {
+    const user = {username: username, password: password}
+    fetch("/login", {
       method: "POST",
       headers: {
         "Content-Type" : "application/json"
       }, 
       body: JSON.stringify(user)
     })
-    .then(r => r.json())
-    .then(console.log)
+    .then(r => {
+        if (r.ok) {
+            r.json().then(navigate("/home"))
+        } else {
+            r.json().then(e => console.log(e.error))
+        }
+    })
   };
 
   const [username, setUsername] = useState("")
@@ -73,9 +81,9 @@ export default function SignIn() {
               required
               fullWidth
               id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              label="Username"
+              name="user"
+              autoComplete="username"
               autoFocus
               onChange={e => setUsername(e.target.value)}
             />
