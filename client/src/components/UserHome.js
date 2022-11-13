@@ -3,12 +3,17 @@ import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 // import DeleteIcon from '@mui/icons-material/Delete';
 
-const UserHome = ({ user }) => {
+const UserHome = ({ user, setUser }) => {
     let navigate = useNavigate()
     
-    const handleDelete = (user) => {
+    const handleDelete = () => {
         fetch("/logout", {
             method: "DELETE"
+        })
+        .then(r => {
+            if (r.ok) {
+            setUser(null)
+            }
         })
         navigate("/login")
     }
