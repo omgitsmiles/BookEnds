@@ -57,8 +57,6 @@ export default function Login({ setUser, user }) {
     })
   };
 
-console.log(user)
-
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
