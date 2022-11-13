@@ -10,7 +10,6 @@ import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import Paolo from '../assets/Paolo.jpeg'
 import { Link } from 'react-router-dom'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
