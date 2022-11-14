@@ -15,11 +15,11 @@ class UsersController < ApplicationController
         end
     end
 
-    def update
-        user = User.find_by(id: session[:user_id])
-        user.update!(user_params)
-        render json: user, status: 201
-    end
+    # def update
+    #     user = User.find_by(id: session[:user_id])
+    #     user.update!(user_params)
+    #     render json: user, status: 201
+    # end
 
     private
 

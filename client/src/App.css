@@ -1,6 +1,6 @@
-.App {
+/* .App {
   text-align: center;
-}
+} */
 
 .App-logo {
   height: 40vmin;
@@ -37,10 +37,15 @@
   }
 }
 
+nav {
+  display: flex;
+  align-items: center;
+}
 
 .navBar {
   border-bottom: solid black 1px;
   display: flex;
+  position: relative;
   justify-content: space-between;
   padding: 0.5rem;
 }
@@ -48,4 +53,8 @@
 .navUser {
   justify-content: center;
   left: 1350px;
+}
+
+.signIn {
+  align-items: right;
 }

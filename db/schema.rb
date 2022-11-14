@@ -17,9 +17,9 @@ ActiveRecord::Schema.define(version: 2022_11_13_040024) do
     t.string "author"
     t.string "genre"
     t.string "description"
+    t.string "book_img"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "image"
   end
 
   create_table "reviews", force: :cascade do |t|

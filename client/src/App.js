@@ -5,6 +5,7 @@ import Home from './components/Home';
 import Login from './components/Login';
 import NavBar from './components/NavBar';
 import Signup from './components/Signup';
+import NewBook from './components/NewBook';
 import UserHome from './components/UserHome';
 
 
@@ -26,6 +27,7 @@ function App() {
         <Route path="/login" element={<Login setUser={setUser} user={user}/>}/>
         <Route path="/user/new" element={<Signup setUser={setUser}/>}/>
         <Route path="/user/home" element={<UserHome user={user} setUser={setUser}/>} />
+        <Route path="/books/new" element={<NewBook />} />
       </Routes>
     </div>
   );
