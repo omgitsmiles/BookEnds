@@ -18,7 +18,6 @@ const UserHome = ({ user, setUser }) => {
         })
         navigate("/login")
     }
-    console.log(user)
 
     const handleUpdate = (e) => {
         e.preventDefault()
