@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom';
 
 const UserHome = ({ user, setUser }) => {
     let navigate = useNavigate()
-    const [rating, setRating] = useState()
+    // const [rating, setRating] = useState()
     
     const handleDelete = () => {
         fetch("/logout", {

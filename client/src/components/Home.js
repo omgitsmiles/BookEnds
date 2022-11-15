@@ -31,7 +31,9 @@ const theme = createTheme();
 
 export default function Album({ books }) {
 
-    console.log(books)
+    const bookLink = (bookid) => {
+        return `/books/${bookid}/`;
+    }
 
   return (
     <ThemeProvider theme={theme}>
@@ -99,7 +101,7 @@ export default function Album({ books }) {
                     <Rating name="read-only" value={book.reviews.map(review => review.rating)} readOnly />
                   </CardContent>
                   <CardActions>
-                    <Button size="small">View</Button>
+                    <Link to={bookLink(book.id)}><Button size="small">View</Button></Link>
                   </CardActions>
                 </Card>
               </Grid>
@@ -107,7 +109,6 @@ export default function Album({ books }) {
           </Grid>
         </Container>
       </main>
-      {/* Footer */}
       <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">
         <Typography variant="h6" align="center" gutterBottom>
           
@@ -122,7 +123,6 @@ export default function Album({ books }) {
         </Typography>
         <Copyright />
       </Box>
-      {/* End footer */}
     </ThemeProvider>
   );
 }
