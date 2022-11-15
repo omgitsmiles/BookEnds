@@ -3,6 +3,7 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
+import Rating from '@mui/material/Rating';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import React, { useState } from 'react';
@@ -24,12 +25,16 @@ const UserHome = ({ user, setUser }) => {
         navigate("/login")
     }
 
+    console.log(user)
+
     return (
+
     <div>
     Welcome {user.username}
     <Button onClick={handleDelete}>Logout</Button>
+    <br></br>
+    MyBooks:
     <Container sx={{ py: 8 }} maxWidth="md">
-          {/* End hero unit */}
           <Grid container spacing={4}>
             {user.books.map((book) => (
               <Grid item key={book} xs={12} sm={6} md={4}>
@@ -52,17 +57,15 @@ const UserHome = ({ user, setUser }) => {
                     <Typography>
                       {book.description}
                     </Typography>
+                    <Rating name="read-only" value={user.reviews.map(review => review.rating)} readOnly />
                   </CardContent>
-                  <CardActions>
-                    <Button size="small">View</Button>
-                    <Button size="small">Edit</Button>
-                  </CardActions>
                 </Card>
               </Grid>
             ))}
           </Grid>
         </Container>
     </div>
+
     )
 
 }
