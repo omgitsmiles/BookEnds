@@ -12,7 +12,6 @@ import UserHome from './components/UserHome';
 function App() {
   const [books, setBooks] = useState([])
   const [user, setUser] = useState(null)
-  const [loggedIn, setIsLoggedIn] = useState(false)
 
   useEffect(() => {
     fetch("/books")
@@ -31,9 +30,9 @@ function App() {
       <NavBar user={user}/>
       <Routes>
         <Route path="/home" element={<Home books={books}/>}/>
-        <Route path="/login" element={<Login setUser={setUser} user={user} setIsLoggedIn={setIsLoggedIn}/>}/>
+        <Route path="/login" element={<Login setUser={setUser} user={user}/>}/>
         <Route path="/user/new" element={<Signup setUser={setUser}/>}/>
-        <Route path="/user/home" element={<UserHome user={user} setUser={setUser} loggedIn={loggedIn}/>} />
+        <Route path="/user/home" element={<UserHome user={user} setUser={setUser}/>} />
         <Route path="/books/new" element={<NewBook onSubmitAddBook={onSubmitAddBook}/>} />
       </Routes>
     </div>
