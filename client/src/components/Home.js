@@ -82,10 +82,11 @@ export default function Album({ books }) {
                   <CardMedia
                     component="img"
                     sx={{
-                      // 16:9
-                      pt: '56.25%',
+                      // 16:9 56.25%
+                      pt: '56.25%'
+                    ,
                     }}
-                    image={book.image}
+                    image={book.book_img}
                     alt={book.title}
                   />
                   <CardContent sx={{ flexGrow: 1 }}>
@@ -109,7 +110,7 @@ export default function Album({ books }) {
       {/* Footer */}
       <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">
         <Typography variant="h6" align="center" gutterBottom>
-          Footer
+          
         </Typography>
         <Typography
           variant="subtitle1"
@@ -117,7 +118,7 @@ export default function Album({ books }) {
           color="text.secondary"
           component="p"
         >
-          Something here to give the footer a purpose!
+          a Ruby on Rails and React.js production 🤝
         </Typography>
         <Copyright />
       </Box>

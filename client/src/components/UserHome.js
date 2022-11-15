@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 
 const UserHome = ({ user, setUser }) => {
     let navigate = useNavigate()
+    const [rating, setRating] = useState()
     
     const handleDelete = () => {
         fetch("/logout", {
@@ -25,7 +26,11 @@ const UserHome = ({ user, setUser }) => {
         navigate("/login")
     }
 
-    console.log(user)
+    console.log(user.reviews)
+
+    const handleUpdate = () => {
+        fetch("/reviews/")
+    }
 
     return (
 
@@ -47,7 +52,7 @@ const UserHome = ({ user, setUser }) => {
                       // 16:9
                       pt: '56.25%',
                     }}
-                    image={book.image}
+                    image={book.book_img}
                     alt={book.title}
                   />
                   <CardContent sx={{ flexGrow: 1 }}>
@@ -57,7 +62,15 @@ const UserHome = ({ user, setUser }) => {
                     <Typography>
                       {book.description}
                     </Typography>
-                    <Rating name="read-only" value={user.reviews.map(review => review.rating)} readOnly />
+                    {/* <Rating name="read-only" value={user.reviews.map(review => review.rating)} readOnly /> */}
+                    <Typography component="legend"><strong>Rate Your Book:</strong></Typography>
+                    <Rating
+                        name="simple-controlled"
+                        // value={value}
+                        // onChange={(newValue) => {
+                        // setValue(newValue);
+                        // }}
+                    />
                   </CardContent>
                 </Card>
               </Grid>
