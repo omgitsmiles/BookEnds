@@ -37,7 +37,7 @@ export default function SignUp() {
     const [password, setPassword] = useState("")
     const [errorsMsg, setErrorsMsg] = useState([])
     const [user, setUser] = useState(null)
-    let navigate = useNavigate()
+    const navigate = useNavigate()
 
   const handleSubmit = (event) => {
     event.preventDefault();

@@ -31,11 +31,11 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function Login({ setUser, user }) {
+export default function Login({ setUser, setIsLoggedIn }) {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState([])
-    let navigate = useNavigate();
+    const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -50,10 +50,11 @@ export default function Login({ setUser, user }) {
     .then(r => {
         if (r.ok) {
             r.json().then(user => setUser(user))
-            navigate("/user/home")
+            navigate("/home")
         } else {
             r.json().then(e => setError(e.error))
         }
+    setIsLoggedIn(true)
     })
   };
 
