@@ -20,7 +20,11 @@ function App() {
     .then(books => setBooks(books))
   }, [])
 
-  console.log(user)
+  const onSubmitAddBook = (newBook) => {
+    setBooks([...books, newBook])
+  }
+
+ 
 
   return (
     <div className="App">
@@ -30,7 +34,7 @@ function App() {
         <Route path="/login" element={<Login setUser={setUser} user={user} setIsLoggedIn={setIsLoggedIn}/>}/>
         <Route path="/user/new" element={<Signup setUser={setUser}/>}/>
         <Route path="/user/home" element={<UserHome user={user} setUser={setUser} loggedIn={loggedIn}/>} />
-        <Route path="/books/new" element={<NewBook />} />
+        <Route path="/books/new" element={<NewBook onSubmitAddBook={onSubmitAddBook}/>} />
       </Routes>
     </div>
   );
