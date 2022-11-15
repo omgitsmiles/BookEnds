@@ -35,6 +35,7 @@ export default function SignUp({ onSubmitNewUser }) {
     const [email, setEmail] = useState("")
     const [quote, setQuote] = useState("")
     const [password, setPassword] = useState("")
+    const [avatar, setAvatar] = useState("")
     const [errorsMsg, setErrorsMsg] = useState([])
     const navigate = useNavigate()
 
@@ -70,7 +71,7 @@ export default function SignUp({ onSubmitNewUser }) {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign up
@@ -112,16 +113,30 @@ export default function SignUp({ onSubmitNewUser }) {
                 />
               </Grid>
               <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                  onChange={e => setPassword(e.target.value)}
-                />
+                  <TextField
+                    required
+                    fullWidth
+                    name="password"
+                    label="Password"
+                    type="password"
+                    id="password"
+                    autoComplete="new-password"
+                    onChange={e => setPassword(e.target.value)}
+                  />
+                  <br></br>
+                  <br></br>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    name="avatar"
+                    label="Profile Picture"
+                    type="avatar"
+                    id="avatar"
+                    autoComplete="new-avatar"
+                    onChange={e => setAvatar(e.target.value)}
+                  />
+                </Grid>
                 {errorsMsg.errors ? ( 
                     <Alert severity="error">
                     <AlertTitle>Error</AlertTitle>
@@ -131,12 +146,12 @@ export default function SignUp({ onSubmitNewUser }) {
                     </Alert>
                 ): null}
               </Grid>
-              <Grid item xs={12}>
+              {/* <Grid item xs={12}>
                 <FormControlLabel
                   control={<Checkbox value="allowExtraEmails" color="primary" />}
                   label="I want to receive inspiration, marketing promotions and updates via email."
                 />
-              </Grid>
+              </Grid> */}
             </Grid>
             <Button
               type="submit"
