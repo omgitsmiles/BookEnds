@@ -31,7 +31,7 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function Login({ setUser, setIsLoggedIn }) {
+export default function Login({ setUser }) {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState([])
@@ -54,7 +54,6 @@ export default function Login({ setUser, setIsLoggedIn }) {
         } else {
             r.json().then(e => setError(e.error))
         }
-    setIsLoggedIn(true)
     })
   };
 

@@ -23,6 +23,9 @@ function App() {
     setBooks([...books, newBook])
   }
 
+  const onSubmitNewUser = (newUser) => {
+    setUser([...user, newUser])
+  }
  
 
   return (
@@ -31,7 +34,7 @@ function App() {
       <Routes>
         <Route path="/home" element={<Home books={books}/>}/>
         <Route path="/login" element={<Login setUser={setUser} user={user}/>}/>
-        <Route path="/user/new" element={<Signup setUser={setUser}/>}/>
+        <Route path="/user/new" element={<Signup onSubmitNewUser={onSubmitNewUser}/>}/>
         <Route path="/user/home" element={<UserHome user={user} setUser={setUser}/>} />
         <Route path="/books/new" element={<NewBook onSubmitAddBook={onSubmitAddBook}/>} />
       </Routes>

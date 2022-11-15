@@ -30,17 +30,16 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignUp() {
+export default function SignUp({ onSubmitNewUser }) {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [quote, setQuote] = useState("")
     const [password, setPassword] = useState("")
     const [errorsMsg, setErrorsMsg] = useState([])
-    const [user, setUser] = useState(null)
     const navigate = useNavigate()
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
     const newUser = {username: name, email: email, quote: quote, password: password}
     fetch("/signup", {
         method: "POST",
@@ -51,8 +50,8 @@ export default function SignUp() {
     })
     .then(r => {
         if (r.ok) {
-            r.json().then(nUser => setUser(nUser))
-            navigate("/user/home")
+            r.json().then(newUser => onSubmitNewUser(newUser))
+            navigate("/home")
             } else {
             r.json().then(err => setErrorsMsg(err))
             }

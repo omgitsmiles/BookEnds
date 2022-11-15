@@ -2,8 +2,6 @@ import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Paolo from '../assets/Paolo.jpeg'
 import Typography from '@mui/material/Typography';
 import { NavLink, Link } from 'react-router-dom';
 
