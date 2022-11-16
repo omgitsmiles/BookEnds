@@ -11,6 +11,11 @@ class BooksController < ApplicationController
         render json: book, status: 201
     end
 
+    def show
+        book = Book.find(params[:id])
+        render json: book, status: 200
+    end
+
     private
 
     def authorize 

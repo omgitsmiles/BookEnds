@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import Home from './components/Home';
 import Login from './components/Login';
+import Book from './components/Book';
 import NavBar from './components/NavBar';
 import Signup from './components/Signup';
 import NewBook from './components/NewBook';
@@ -37,6 +38,7 @@ function App() {
         <Route path="/user/new" element={<Signup onSubmitNewUser={onSubmitNewUser}/>}/>
         <Route path="/user/home" element={<UserHome user={user} setUser={setUser}/>} />
         <Route path="/books/new" element={<NewBook onSubmitAddBook={onSubmitAddBook}/>} />
+        <Route path="/books/:id" element={<Book user={user}/>}/>
       </Routes>
     </div>
   );

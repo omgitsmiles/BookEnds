@@ -52,7 +52,7 @@ nav {
 
 .navUser {
   justify-content: center;
-  left: 1350px;
+  float: right;
 }
 
 .signIn {

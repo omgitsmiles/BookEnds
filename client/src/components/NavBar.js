@@ -7,6 +7,8 @@ import { NavLink, Link } from 'react-router-dom';
 
 const NavBar = ({ user }) => {
 
+//float
+
 
   return (
     <nav>
@@ -15,11 +17,14 @@ const NavBar = ({ user }) => {
         <Typography variant="h6" color="inherit" noWrap>
          <NavLink style={({ textDecoration: "none" })}to='/home'>📚ends</NavLink> 
         </Typography>
-      </Toolbar>{!user ? (
-       <Link to="/login"><button variant="text" className="signIn">Sign In</button></Link>
-        ) : ( 
-      <Link to="/user/home"><Avatar src={user.avatar} /></Link> )}
-      <Link to="/books/new"><button>Add a Book</button></Link>
+      </Toolbar>
+      <div className="navUser">
+          {!user ? (
+        <Link to="/login"><button variant="text" className="signIn">Sign In</button></Link>
+          ) : ( 
+        <Link to="/user/home"><Avatar src={user.avatar} /></Link> )}
+        <Link to="/books/new"><button>Add a Book</button></Link>
+      </div>
     </AppBar>
     </nav>
   )

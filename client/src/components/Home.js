@@ -11,8 +11,9 @@ import Rating from '@mui/material/Rating';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { Link } from 'react-router-dom'
+import { Link, Route, Routes, useNavigate } from 'react-router-dom'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Book from './Book'
 
 function Copyright() {
   return (
@@ -30,9 +31,10 @@ function Copyright() {
 const theme = createTheme();
 
 export default function Album({ books }) {
+    const navigate = useNavigate()
 
     const bookLink = (bookid) => {
-        return `/books/${bookid}/`;
+        navigate(`/books/${bookid}`);
     }
 
   return (
@@ -101,7 +103,7 @@ export default function Album({ books }) {
                     <Rating name="read-only" value={book.reviews.map(review => review.rating)} readOnly />
                   </CardContent>
                   <CardActions>
-                    <Link to={bookLink(book.id)}><Button size="small">View</Button></Link>
+                    <Link to={bookLink(book.id)}><Button size="small">View</Button></Link> 
                   </CardActions>
                 </Card>
               </Grid>

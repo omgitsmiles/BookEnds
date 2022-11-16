@@ -2,7 +2,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
+// import CardActions from '@mui/material/CardActions';
 import Rating from '@mui/material/Rating';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -62,7 +62,6 @@ const UserHome = ({ user, setUser }) => {
                     <Typography>
                       {book.description}
                     </Typography>
-                    {/* <Rating name="read-only" value={user.reviews.map(review => review.rating)} readOnly /> */}
                     <Typography component="legend"><strong>Rate Your Book:</strong></Typography>
                     <Rating
                         name="simple-controlled"
