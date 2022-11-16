@@ -11,9 +11,8 @@ import Rating from '@mui/material/Rating';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { Link, Route, Routes, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Book from './Book'
 
 function Copyright() {
   return (

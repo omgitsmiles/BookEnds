@@ -58,3 +58,10 @@ nav {
 .signIn {
   align-items: right;
 }
+
+book {
+  float: inline-end;
+  display: flex;
+  position: relative;
+  justify-content: center;
+}

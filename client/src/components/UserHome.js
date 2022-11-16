@@ -3,6 +3,7 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 // import CardActions from '@mui/material/CardActions';
+import TextField from '@mui/material/TextField';
 import Rating from '@mui/material/Rating';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -11,7 +12,8 @@ import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 
 const UserHome = ({ user, setUser }) => {
-    let navigate = useNavigate()
+    const [newReview, setNewReview] = useState("")
+    const navigate = useNavigate()
     // const [rating, setRating] = useState()
     
     const handleDelete = () => {
@@ -25,8 +27,6 @@ const UserHome = ({ user, setUser }) => {
         })
         navigate("/login")
     }
-
-    console.log(user.reviews)
 
     const handleUpdate = () => {
         fetch("/reviews/")
@@ -70,6 +70,17 @@ const UserHome = ({ user, setUser }) => {
                         // setValue(newValue);
                         // }}
                     />
+                    <Typography component="legend"><strong>Your Review:</strong></Typography>
+                    <Typography>"{user.reviews.map(r => r.review)}"</Typography>
+                    {/* <TextField 
+                    className="blogPost"
+                    id="outlined-multiline-static"
+                    label="Review"
+                    multiline
+                    rows={10}
+                    // value={blogPost}
+                    // onChange={(e) => setBlogPost(e.target.value)}
+                    /> */}
                   </CardContent>
                 </Card>
               </Grid>

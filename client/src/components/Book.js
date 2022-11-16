@@ -18,17 +18,13 @@ const Book = ({ user }) => {
         .then(b => setBook(b))
     }, [id])
 
-    console.log(book)
-
   return (
     <div>
     <Container sx={{ py: 8 }} maxWidth="md">
     <Grid container spacing={4}>
-      {/* {book.map((b) => ( */}
         <Grid item key={book.title} xs={12} sm={6} md={4}>
           <Card
-            sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
-          >
+            sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
             <CardMedia
               component="img"
               sx={{
@@ -56,7 +52,6 @@ const Book = ({ user }) => {
             </CardContent>
           </Card>
         </Grid>
-      {/* ))} */}
     </Grid>
   </Container>
   </div>
