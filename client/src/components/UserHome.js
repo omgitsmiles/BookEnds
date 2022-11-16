@@ -8,6 +8,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import React, { useState } from 'react';
 import Button from '@mui/material/Button';
+import UserBooks from './UserBooks';
 import { useNavigate } from 'react-router-dom';
 
 const UserHome = ({ user, setUser }) => {
@@ -16,7 +17,7 @@ const UserHome = ({ user, setUser }) => {
     const [toggleNewReview, setToggieNewReview] = useState(false)
     const [newReview, setNewReview] = useState("")
     const navigate = useNavigate()
-    // const [rating, setRating] = useState()
+    const [rateBook, setRateBook] = useState()
     
     const handleDelete = () => {
         fetch("/logout", {
@@ -29,6 +30,8 @@ const UserHome = ({ user, setUser }) => {
         })
         navigate("/login")
     }
+
+    console.log(rateBook)
 
     const handleUpdate = () => {
         const addReview = {review: newReview}
@@ -78,10 +81,10 @@ const UserHome = ({ user, setUser }) => {
                     <Typography component="legend"><strong>Rate Your Book:</strong></Typography>
                     <Rating
                         name="simple-controlled"
-                        value={rating}
-                        // onChange={(newValue) => {
-                        // setValue(newValue);
-                        // }}
+                        defaultValue={review.rating}
+                        onChange={(rateBook) => {
+                        setRateBook(rateBook);
+                        }}
                     />
                     <Typography component="legend"><strong>Your Review:</strong></Typography>
                     <Typography>"{reviews.map(r => r.review)}"</Typography>
