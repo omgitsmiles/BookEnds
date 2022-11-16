@@ -10,9 +10,10 @@ import CardMedia from '@mui/material/CardMedia';
 import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
+import { ButtonGroup } from '@mui/material';
 
 const UserHome = ({ user, setUser }) => {
-    const [newReview, setNewReview] = useState("")
+    const [toggleNewReview, setToggieNewReview] = useState(false)
     const navigate = useNavigate()
     // const [rating, setRating] = useState()
     
@@ -31,6 +32,12 @@ const UserHome = ({ user, setUser }) => {
     const handleUpdate = () => {
         fetch("/reviews/")
     }
+
+    const handleToggle = () => {
+        setToggieNewReview(toggle => !toggle)
+    }
+
+    console.log(toggleNewReview)
 
     return (
 
@@ -72,7 +79,8 @@ const UserHome = ({ user, setUser }) => {
                     />
                     <Typography component="legend"><strong>Your Review:</strong></Typography>
                     <Typography>"{user.reviews.map(r => r.review)}"</Typography>
-                    {/* <TextField 
+                    <Button onClick={handleToggle}>Write a review</Button>
+                   {toggleNewReview ?  <TextField 
                     className="blogPost"
                     id="outlined-multiline-static"
                     label="Review"
@@ -80,7 +88,7 @@ const UserHome = ({ user, setUser }) => {
                     rows={10}
                     // value={blogPost}
                     // onChange={(e) => setBlogPost(e.target.value)}
-                    /> */}
+                    /> : null}
                   </CardContent>
                 </Card>
               </Grid>
