@@ -103,7 +103,7 @@ export default function Album({ books }) {
                     <Rating name="read-only" value={book.reviews.map(review => review.rating)} readOnly />
                   </CardContent>
                   <CardActions>
-                    <Link to={bookLink(book.id)}><Button size="small">View</Button></Link> 
+                    <Button size="small" onClick={() => bookLink(book.id)}>View</Button>
                   </CardActions>
                 </Card>
               </Grid>

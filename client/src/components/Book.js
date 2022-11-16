@@ -16,16 +16,16 @@ const Book = ({ user }) => {
         fetch(`/books/${id}`)
         .then(r => r.json())
         .then(b => setBook(b))
-    }, [])
+    }, [id])
 
     console.log(book)
 
   return (
-    <div>hi
-    {/* <Container sx={{ py: 8 }} maxWidth="md">
+    <div>
+    <Container sx={{ py: 8 }} maxWidth="md">
     <Grid container spacing={4}>
-      {book.map((b) => (
-        <Grid item key={book} xs={12} sm={6} md={4}>
+      {/* {book.map((b) => ( */}
+        <Grid item key={book.title} xs={12} sm={6} md={4}>
           <Card
             sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
           >
@@ -35,15 +35,15 @@ const Book = ({ user }) => {
                 // 16:9
                 pt: '56.25%',
               }}
-              image={b.book_img}
-              alt={b.title}
+              image={book.book_img}
+              alt={book.title}
             />
             <CardContent sx={{ flexGrow: 1 }}>
               <Typography gutterBottom variant="h5" component="h2">
-                {b.title}
+                {book.title}
               </Typography>
               <Typography>
-                {b.description}
+                {book.description}
               </Typography>
               <Typography component="legend"><strong>Rate Your Book:</strong></Typography>
               <Rating
@@ -56,9 +56,9 @@ const Book = ({ user }) => {
             </CardContent>
           </Card>
         </Grid>
-      ))}
+      {/* ))} */}
     </Grid>
-  </Container> */}
+  </Container>
   </div>
   )
 }
