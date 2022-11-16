@@ -38,11 +38,11 @@ const UserHome = ({ user, setUser }) => {
                 "Content-Type" : "application/json"
             },
             body: JSON.stringify(addReview)
-        })
-        console.log("submitted")
-        setNewReview("")
+        })  
         .then(r => r.json())
-        .then(review => setUser([...user, user.reviews: [...reviews, review]]))
+        // .then(review => setUser(user.reviews[review])) How to update state on nested array? also add error handling on Book.js
+        setNewReview("")
+     
     }
 
     return (

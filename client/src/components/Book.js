@@ -11,6 +11,9 @@ import { useParams } from 'react-router-dom';
 const Book = ({ user }) => {
     const {id} = useParams()
     const [book, setBook] = useState([])
+    const { reviews, title, book_img, description } = book
+
+    console.log(reviews)
 
     useEffect(() => {
         fetch(`/books/${id}`)
@@ -22,7 +25,7 @@ const Book = ({ user }) => {
     <div>
     <Container sx={{ py: 8 }} maxWidth="md">
     <Grid container spacing={4}>
-        <Grid item key={book.title} xs={12} sm={6} md={4}>
+        <Grid item key={title} xs={12} sm={6} md={4}>
           <Card
             sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
             <CardMedia
@@ -31,24 +34,27 @@ const Book = ({ user }) => {
                 // 16:9
                 pt: '56.25%',
               }}
-              image={book.book_img}
-              alt={book.title}
+              image={book_img}
+              alt={title}
             />
             <CardContent sx={{ flexGrow: 1 }}>
               <Typography gutterBottom variant="h5" component="h2">
-                {book.title}
+                {title}
               </Typography>
               <Typography>
-                {book.description}
+                {description}
               </Typography>
               <Typography component="legend"><strong>Rate Your Book:</strong></Typography>
               <Rating
                   name="simple-controlled"
-                  // value={value}
+                //   value={rating}
                   // onChange={(newValue) => {
                   // setValue(newValue);
                   // }}
               />
+              <Typography component="legend"><strong>Review: {reviews.map(re => (
+                <div>"{re.review}"</div>
+                ))}</strong></Typography>
             </CardContent>
           </Card>
         </Grid>
