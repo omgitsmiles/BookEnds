@@ -8,7 +8,7 @@ import CardMedia from '@mui/material/CardMedia';
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-const Book = ({ user }) => {
+const Book = () => {
     const {id} = useParams()
     const [book, setBook] = useState([])
     const { reviews, title, book_img, description } = book
@@ -52,9 +52,9 @@ const Book = ({ user }) => {
                   // setValue(newValue);
                   // }}
               />
-              <Typography component="legend"><strong>Review: {reviews.map(re => (
-                <div>"{re.review}"</div>
-                ))}</strong></Typography>
+              {/* <Typography component="legend"><strong>Review: {reviews.map(r => (
+                <div>"{r.review}" - {}</div>
+                ))}</strong></Typography> */}
             </CardContent>
           </Card>
         </Grid>

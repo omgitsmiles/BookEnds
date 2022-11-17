@@ -12,14 +12,27 @@ class BooksController < ApplicationController
     end
 
     def show
-        book = Book.find_by(id: params[:id])
-        render json: book, status: 200
+        render json: find_book, status: 200
+    end
+
+    def update
+        find_book.update!(book_params)
+        render json: book, status: 202
+    end
+
+    def destroy
+        find_book.destroy
+        head :no_content
     end
 
     private
 
     def authorize 
-        render json: { error: ["Must be logged in!"] }, status: 401 unless session[:user_id]
+        render json: { error: ["Must be logged in to add a book!"] }, status: 401 unless session[:user_id]
+    end
+
+    def find_book
+        Book.find(params[:id])
     end
     
     def book_params
