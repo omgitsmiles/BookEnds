@@ -15,11 +15,18 @@ function App() {
   const [user, setUser] = useState(null)
 
   useEffect(() => {
+    fetch("/me").then((r) => {
+      if (r.ok) {
+        r.json().then((user) => setUser(user));
+      }
+    });
+  }, []);
+
+  useEffect(() => {
     fetch("/books")
     .then(r => r.json())
     .then(books => setBooks(books))
   }, [])
-
   
 
   const onSubmitAddBook = (newBook) => {

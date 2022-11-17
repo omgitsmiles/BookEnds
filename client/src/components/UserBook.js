@@ -16,8 +16,6 @@ const UserBooks = ({ book, user }) => {
   const [newReview, setNewReview] = useState("")
   const [rateBook, setRateBook] = useState()
 
-  console.log(reviews)
-
     const handleUpdate = () => {
         const addReview = {review: newReview}
         fetch(`/reviews/${review.id}`, {
@@ -61,9 +59,9 @@ const UserBooks = ({ book, user }) => {
                     <Rating
                         name="simple-controlled"
                         defaultValue={review.rating}
-                        onChange={(rateBook) => {
-                        setRateBook(rateBook);
-                        }}
+                        // onChange={(rateBook) => {
+                        // setRateBook(rateBook);
+                        // }}
                     />
                     <Typography component="legend"><strong>Your Review:</strong></Typography>
                     <Typography>"{reviews.map(rev => rev.review)}"</Typography>

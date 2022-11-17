@@ -11,9 +11,9 @@ import { useParams } from 'react-router-dom';
 const Book = () => {
     const {id} = useParams()
     const [book, setBook] = useState({ reviews: [] })
-    const { reviews, title, book_img, description } = book
+    const { reviews, title, book_img, description, users } = book
 
-    console.log(book)
+    // console.log(book)
 
     useEffect(() => {
         fetch(`/books/${id}`)
@@ -53,7 +53,7 @@ const Book = () => {
                   // }}
               />
               <Typography component="legend"><strong>Review: {reviews.map(r => (
-                <div key={r.id}>"{r.review}" - {}</div>
+                <div key={r.id}>"{r.review}" - {users.map((user => user.id === r.user_id ? user.username : null))}</div>
                 ))}</strong></Typography>
             </CardContent>
           </Card>
