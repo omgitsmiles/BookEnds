@@ -1,8 +1,8 @@
 class ReviewsController < ApplicationController
-    before_action :authorize, only: :create
+    before_action :authorize, only: [:create, :update]
 
     def index
-        reviews = find_user.reviews.all
+        reviews = Review.all
         render json: reviews, status: 200
     end
 
