@@ -7,7 +7,8 @@ class BooksController < ApplicationController
     end
 
     def create
-        book = Book.create!(book_params)
+        user = User.find_by(id: session[:user_id])
+        book = user.books.create!(book_params)
         render json: book, status: 201
     end
 

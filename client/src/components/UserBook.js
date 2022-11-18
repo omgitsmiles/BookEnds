@@ -7,14 +7,23 @@ import Rating from '@mui/material/Rating';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 const UserBooks = ({ book, user }) => {
-  const { username, reviews } = user
-  const [ review, rating ] = reviews
+  const { reviews } = user
+  const [ review ] = reviews
+  const [rateBook, setRateBook] = useState(review.rating)
   const [toggleNewReview, setToggieNewReview] = useState(false)
   const [newReview, setNewReview] = useState("")
-  const [rateBook, setRateBook] = useState()
+  const [previews, setPreviews] = useState([])
+
+    useEffect(() => {
+      fetch("/reviews")
+      .then(r => r.json())
+      .then(rview => setPreviews(rview))
+    }, [])
+
+    console.log(previews)
 
     const handleUpdate = () => {
         const addReview = {review: newReview}
@@ -29,6 +38,9 @@ const UserBooks = ({ book, user }) => {
         // .then(review => setUser(user.reviews[review])) How to update state on nested array? also add error handling on Book.js
         setNewReview("")
     }
+
+    
+    
     
   return (
     <div>
@@ -59,6 +71,7 @@ const UserBooks = ({ book, user }) => {
                     <Rating
                         name="simple-controlled"
                         defaultValue={review.rating}
+                        onChange={e => setRateBook(e.target.value)}
                         // onChange={(rateBook) => {
                         // setRateBook(rateBook);
                         // }}

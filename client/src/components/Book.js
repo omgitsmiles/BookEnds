@@ -1,25 +1,40 @@
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import Rating from '@mui/material/Rating';
+import Button from '@mui/material/Button';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-const Book = () => {
+const Book = ({ user }) => {
     const {id} = useParams()
     const [book, setBook] = useState({ reviews: [] })
+    const [newReview, setNewReview] = useState("")
+    const [toggleReviewBox, setToggleReviewBox] = useState(false)
     const { reviews, title, book_img, description, users } = book
-
-    // console.log(book)
 
     useEffect(() => {
         fetch(`/books/${id}`)
         .then(r => r.json())
         .then(b => setBook(b))
     }, [id])
+
+    const handleNewReview = () => {
+      const writtenReview = {review: newReview}
+      fetch("/reviews", {
+        method: "POST",
+        headers: {
+          "Content-Type" : "application/json"
+        },
+        body: JSON.stringify(writtenReview)
+      })
+    }
+
+    console.log(user)
 
   return (
     <div>
@@ -55,6 +70,23 @@ const Book = () => {
               <Typography component="legend"><strong>Review: {reviews.map(r => (
                 <div key={r.id}>"{r.review}" - {users.map((user => user.id === r.user_id ? user.username : null))}</div>
                 ))}</strong></Typography>
+                {user ? <>
+                <Button onClick={() => setToggleReviewBox(toggleReviewBox => !toggleReviewBox)}>Write your review</Button><form>
+                   <TextField 
+                    className="review"
+                    id="outlined-multiline-static"
+                    label="Review"
+                    multiline
+                    rows={10}
+                    onChange={(e) => setNewReview(e.target.value)}
+                    /> <Button onClick={handleNewReview}>Submit</Button>
+                    </form>
+                    </> : (
+                      <>
+                        <br></br>
+                        <strong>Sign in to review this book!</strong>
+                      </>
+                    )}
             </CardContent>
           </Card>
         </Grid>

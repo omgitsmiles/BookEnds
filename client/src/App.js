@@ -47,7 +47,7 @@ function App() {
         <Route path="/user/new" element={<Signup onSubmitNewUser={onSubmitNewUser}/>}/>
         <Route path="/user/home" element={<UserHome user={user} setUser={setUser}/>} />
         <Route path="/books/new" element={<NewBook onSubmitAddBook={onSubmitAddBook}/>} />
-        <Route path="/books/:id" element={<Book />}/>
+        <Route path="/books/:id" element={<Book user={user}/>}/>
       </Routes>
     </div>
   );

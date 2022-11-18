@@ -4,11 +4,8 @@ import UserBook from './UserBook';
 import { useNavigate } from 'react-router-dom';
 
 const UserHome = ({ user, setUser }) => {
-    // const { username, books, reviews, id } = user
-    // const [ review, rating ] = reviews
-    // const [] = useState({user.books: []})
+    const { username, books } = user
     const navigate = useNavigate()
-   
     
     const handleDelete = () => {
         fetch("/logout", {
@@ -22,18 +19,18 @@ const UserHome = ({ user, setUser }) => {
         navigate("/login")
     }
 
-    const renderBooks = user.books.map(book => (
+    const renderBooks = books.map(book => (
         <UserBook key={book.id} book={book} user={user}/>
-    ))
+        ))
 
     return (
 
     <div>
-    Welcome {user.username}
+    Welcome {username}
     <Button onClick={handleDelete}>Logout</Button>
     <br></br>
     MyBooks:
-        {renderBooks}
+    {renderBooks}
     </div>
 
     )

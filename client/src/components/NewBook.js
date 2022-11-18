@@ -29,8 +29,6 @@ const NewBook = ({ onSubmitAddBook }) => {
         })
     }
 
-    console.log(errorMsg)
-
   return (
     <div>
         <form onSubmit={handleSubmit}>
