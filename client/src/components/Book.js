@@ -14,7 +14,7 @@ const Book = ({ user }) => {
     const {id} = useParams()
     const [book, setBook] = useState({ reviews: [] })
     const [newReview, setNewReview] = useState("")
-    const [toggleReviewBox, setToggleReviewBox] = useState(false)
+    const [rating, setRating] = useState(0)
     const { reviews, title, book_img, description, users } = book
 
     useEffect(() => {
@@ -24,7 +24,7 @@ const Book = ({ user }) => {
     }, [id])
 
     const handleNewReview = () => {
-      const writtenReview = {review: newReview, book_id: id}
+      const writtenReview = {review: newReview, rating: rating, book_id: id}
       fetch("/reviews", {
         method: "POST",
         headers: {
@@ -33,8 +33,6 @@ const Book = ({ user }) => {
         body: JSON.stringify(writtenReview)
       })
     }
-
-    console.log(reviews)
 
   return (
     <div>
@@ -62,16 +60,16 @@ const Book = ({ user }) => {
               <Typography component="legend"><strong>Rate Your Book:</strong></Typography>
               <Rating
                   name="simple-controlled"
-                //   value={rating}
-                  // onChange={(newValue) => {
-                  // setValue(newValue);
-                  // }}
+                  value={rating}
+                  onChange={(e) => setRating(e.target.value)}
               />
               <Typography component="legend"><strong>Review: {reviews.map(r => (
                 <div key={r.id}>"{r.review}" - {users.map((user => user.id === r.user_id ? user.username : null))}</div>
                 ))}</strong></Typography>
                 {user ? <>
-                <Button onClick={() => setToggleReviewBox(toggleReviewBox => !toggleReviewBox)}>Write your review</Button><form>
+                <br></br>
+               <strong>Write your review:</strong><form>
+                <br></br>
                    <TextField 
                     className="review"
                     id="outlined-multiline-static"
