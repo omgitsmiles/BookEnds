@@ -50,7 +50,7 @@ export default function Login({ setUser }) {
     .then(r => {
         if (r.ok) {
             r.json().then(user => setUser(user))
-            navigate("/home")
+            navigate("/user/home")
         } else {
             r.json().then(e => setError(e.error))
         }

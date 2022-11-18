@@ -7,19 +7,18 @@ import Rating from '@mui/material/Rating';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
-const UserBooks = ({ book, user, bookReviews }) => {
+const UserBooks = ({ book, user }) => {
   const { reviews } = user
+  const { id, book_img, title, description } = book
   const [ review ] = reviews
   const [rateBook, setRateBook] = useState(review.rating)
   const [toggleNewReview, setToggieNewReview] = useState(false)
   const [newReview, setNewReview] = useState("")
 
-  console.log(reviews)
-
     const handleUpdate = () => {
-        const addReview = {review: newReview}
+        const addReview = {review: newReview, rating: rateBook}
         fetch(`/reviews/${review.id}`, {
             method: "PATCH",
             headers: {
@@ -28,18 +27,37 @@ const UserBooks = ({ book, user, bookReviews }) => {
             body: JSON.stringify(addReview)
         })  
         .then(r => r.json())
-        // .then(review => setUser(user.reviews[review])) How to update state on nested array? also add error handling on Book.js
-        setNewReview("")
+      // .then(rev => setUser({user.reviews[...rev.rating, rev.review]})
+      //   setNewReview("")
     }
+    
+    console.log(user.reviews)
 
+
+    // const updatedReviews = user.reviews.map(rev => rev {
+    //   if rev.id === addReview.id {
+    //   return addReview }
+    //     else {
+    //       return rev
+    //     }
+    //   }
+    //   user.reviews = updatedReviews
+    //   setUser({...user})
+
+   
+  // how to handle grabbing the individual review id? maybe map?
+  const handleDelete = (reviewId) => {
+    fetch(`/reviews/${reviewId}`, {
+      method: "DELETE"
+    })
+  }
     
-    
-    
+  const userReviewText = reviews.find(rev => rev.book_id === book.id).review
+
   return (
     <div>
          <Container sx={{ py: 8 }} maxWidth="md">
           <Grid container spacing={4}>
-            {/* {books.map((book) => ( */}
               <Grid item key={book} xs={12} sm={6} md={4}>
                 <Card
                   sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
@@ -50,28 +68,25 @@ const UserBooks = ({ book, user, bookReviews }) => {
                       // 16:9
                       pt: '56.25%',
                     }}
-                    image={book.book_img}
-                    alt={book.title}
+                    image={book_img}
+                    alt={title}
                   />
                   <CardContent sx={{ flexGrow: 1 }}>
                     <Typography gutterBottom variant="h5" component="h2">
-                      {book.title}
+                      {title}
                     </Typography>
                     <Typography>
-                      {book.description}
+                      {description}
                     </Typography>
                     <Typography component="legend"><strong>Rate Your Book:</strong></Typography>
                     <Rating
                         name="simple-controlled"
-                        defaultValue={review.rating}
+                        defaultValue={reviews.map(rev => rev.book_id === id ? rev.rating : null)}
                         onChange={e => setRateBook(e.target.value)}
-                        // onChange={(rateBook) => {
-                        // setRateBook(rateBook);
-                        // }}
                     />
                     <Typography component="legend"><strong>Your Review:</strong></Typography>
-                    <Typography>"{reviews.map(rev => rev.book_id === book.id ? rev.review : null)}"</Typography>
-                    <Button onClick={() => setToggieNewReview(toggle => !toggle)}>Write a review</Button>
+                    <Typography>"{userReviewText}"</Typography>
+                    <Button onClick={() => setToggieNewReview(toggle => !toggle)}>Update Your Review</Button>
                    {toggleNewReview ?  
                    <form>
                    <TextField 
@@ -80,14 +95,16 @@ const UserBooks = ({ book, user, bookReviews }) => {
                     label="Review"
                     multiline
                     rows={10}
-                    defaultValue={review.review}
+                    defaultValue={userReviewText}
                     onChange={(e) => setNewReview(e.target.value)}
                     /> <Button onClick={handleUpdate}>Submit</Button>
                     </form> : null}
+                    <Button onClick={() => console.log(reviews)} sx={{ justifyContent: "center" }} variant="outlined" color="error">
+                      Delete Review
+                    </Button>
                   </CardContent>
                 </Card>
               </Grid>
-            {/* ))} */}
           </Grid>
         </Container>
     </div>

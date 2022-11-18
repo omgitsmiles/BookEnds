@@ -9,21 +9,21 @@ const NavBar = ({ user }) => {
 
 //float
 
-
   return (
     <nav>
     <AppBar className="navBar" position="relative" sx={{ bgcolor: "#f4e7d7" }}>
       <Toolbar>
-        <Typography variant="h6" color="inherit" noWrap>
+        {/* <Typography variant="h6" color="inherit" noWrap> */}
          <NavLink style={({ textDecoration: "none" })}to='/home'>📚ends</NavLink> 
-        </Typography>
+         { user.id ? (<Link className="userNavBarlinks" to="/user/home"><Avatar src={user.avatar} /></Link> ) : ""}
+        {/* </Typography> */}
       </Toolbar>
-      <div className="navUser">
-          {!user ? (
-        <Link to="/login"><button variant="text" className="signIn">Sign In</button></Link>
-          ) : ( 
-        <Link to="/user/home"><Avatar src={user.avatar} /></Link> )}
-        <Link to="/books/new"><button>Add a Book</button></Link>
+      <div>
+          {!user.id ? (
+        <Link  to="/login"><button variant="text" className="signIn">Sign In</button></Link>
+          ) : ( "" 
+         )}
+        <Link className="userNavBarlinks" to="/books/new"><button>Add a Book</button></Link>
       </div>
     </AppBar>
     </nav>

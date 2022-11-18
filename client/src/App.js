@@ -12,7 +12,7 @@ import UserHome from './components/UserHome';
 
 function App() {
   const [books, setBooks] = useState([])
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState({username: "", books: [], reviews: [] })
 
   useEffect(() => {
     fetch("/me").then((r) => {
@@ -27,7 +27,7 @@ function App() {
     .then(r => r.json())
     .then(books => setBooks(books))
   }, [])
-  
+
 
   const onSubmitAddBook = (newBook) => {
     setBooks([...books, newBook])
