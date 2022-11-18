@@ -9,21 +9,14 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import React, { useState, useEffect } from 'react'
 
-const UserBooks = ({ book, user }) => {
+const UserBooks = ({ book, user, bookReviews }) => {
   const { reviews } = user
   const [ review ] = reviews
   const [rateBook, setRateBook] = useState(review.rating)
   const [toggleNewReview, setToggieNewReview] = useState(false)
   const [newReview, setNewReview] = useState("")
-  const [previews, setPreviews] = useState([])
 
-    useEffect(() => {
-      fetch("/reviews")
-      .then(r => r.json())
-      .then(rview => setPreviews(rview))
-    }, [])
-
-    // console.log(previews)
+  console.log(reviews)
 
     const handleUpdate = () => {
         const addReview = {review: newReview}
@@ -77,7 +70,7 @@ const UserBooks = ({ book, user }) => {
                         // }}
                     />
                     <Typography component="legend"><strong>Your Review:</strong></Typography>
-                    <Typography>"{reviews.map(rev => rev.review)}"</Typography>
+                    <Typography>"{reviews.map(rev => rev.book_id === book.id ? rev.review : null)}"</Typography>
                     <Button onClick={() => setToggieNewReview(toggle => !toggle)}>Write a review</Button>
                    {toggleNewReview ?  
                    <form>
