@@ -24,7 +24,7 @@ const Book = ({ user }) => {
     }, [id])
 
     const handleNewReview = () => {
-      const writtenReview = {review: newReview}
+      const writtenReview = {review: newReview, book_id: id}
       fetch("/reviews", {
         method: "POST",
         headers: {
@@ -34,7 +34,7 @@ const Book = ({ user }) => {
       })
     }
 
-    console.log(user)
+    console.log(reviews)
 
   return (
     <div>

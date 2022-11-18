@@ -7,14 +7,13 @@ class ReviewsController < ApplicationController
     end
 
     def create
-        byebug
-        user = User.find_by(id: session[:id])
+        user = User.find_by(id: session[:user_id])
         review = user.reviews.create!(review_params)
         render json: review, status: 201
     end
 
     def update
-        user = User.find_by(id: session[:id])
+        user = User.find_by(id: session[:user_id])
         review = user.reviews.update(review_params)
         render json: review, status: 202
     end
@@ -32,11 +31,11 @@ class ReviewsController < ApplicationController
     end
 
     def authorize 
-        render json: { error: ["Must be logged in!"] }, status: 401 unless session[:user_id]
+        render json: { error: ["Must be logged in to write a review!"] }, status: 401 unless session[:user_id]
     end
 
     def review_params
-        params.permit(:review, :rating)
+        params.permit(:review, :rating, :book_id)
     end
 
 end

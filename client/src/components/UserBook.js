@@ -23,7 +23,7 @@ const UserBooks = ({ book, user }) => {
       .then(rview => setPreviews(rview))
     }, [])
 
-    console.log(previews)
+    // console.log(previews)
 
     const handleUpdate = () => {
         const addReview = {review: newReview}
