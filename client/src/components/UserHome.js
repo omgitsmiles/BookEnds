@@ -27,11 +27,11 @@ const UserHome = ({ user, setUser }) => {
     }
 
     const onSubmitHandleNewReview = (newReview) => {
-        setReviews([...reviews, newReview])
+        setReviews(newReview)
       }
 
     const renderBooks = books.map(book => (
-        <UserBook key={book.id} reviews={reviews} book={book} user={user} setUser={setUser}/>
+        <UserBook key={book.id} onSubmitHandleNewReview={onSubmitHandleNewReview} reviews={reviews} book={book} user={user} setUser={setUser}/>
         ))
 
     return (

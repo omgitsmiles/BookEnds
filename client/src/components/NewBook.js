@@ -33,6 +33,8 @@ const NewBook = ({ onSubmitAddBook }) => {
         })
     }
 
+    console.log(errorMsg)
+
   return (
     <Box
       component="form"

@@ -23,7 +23,6 @@ const UserBooks = ({ book, user, reviews, onSubmitHandleNewReview, setUser }) =>
 
     const handleUpdate = () => {
         const addReview = {review: newReview, rating: rateBook}
-        console.log(reviewID.id)
         fetch(`/reviews/${reviewID.id}`, {
             method: "PATCH",
             headers: {
@@ -34,12 +33,22 @@ const UserBooks = ({ book, user, reviews, onSubmitHandleNewReview, setUser }) =>
         .then(r => r.json())
         .then(newReview => {
           const updatedReview = reviews.map(review => review.id === newReview.id ? newReview : review)
-          console.log(updatedReview)
           onSubmitHandleNewReview(updatedReview)
-          })
+        })
         alert("Your review has been updated")
         setNewReview("")
     }
+    
+
+    
+    // function replaceReview(updatedReview){
+    //  let copyRev = [...reviews]
+    //  let c2 = copyRev.filter(d => d.id !== updatedReview.id)
+    //  copyRev = [...c2, updatedReview]
+    //  console.log(copyRev)
+    //  onSubmitHandleNewReview(copyRev)
+    // }
+
     
     
 
