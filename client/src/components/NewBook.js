@@ -5,9 +5,11 @@ import MenuBookIcon from '@mui/icons-material/MenuBook';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
 import React, { useState } from 'react'
 
 const NewBook = ({ onSubmitAddBook }) => {
+    const [open, setOpen] = useState(false)
     const [title, setTitle] = useState("")
     const [author, setAuthor] = useState("")
     const [genre, setGenre] = useState("")
@@ -29,9 +31,17 @@ const NewBook = ({ onSubmitAddBook }) => {
                 r.json().then(book => onSubmitAddBook(book))
             } else {
                 r.json().then(err => setErrorMsg(err))
-            }
+                }
+                setOpen(true)
         })
     }
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+        setOpen(false);
+      };
 
   return (
     <Box
@@ -86,12 +96,13 @@ const NewBook = ({ onSubmitAddBook }) => {
         <div>
             {errorMsg.errors ? (
                 <div>
-                <Alert severity="error">
-                <AlertTitle>Error</AlertTitle>
-               {errorMsg.errors.map(err => (
-                   <strong key={err}><div>{err}</div></strong>
-                   ))}
-                </Alert>
+                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+                    {errorMsg.errors.map(err => (
+                        <strong key={err}><div>{err}</div></strong>
+                    ))}
+                    </Alert>
+                </Snackbar>
                 </div>
             ) : null}
         </div>
