@@ -16,6 +16,7 @@ import { NavLink, Link } from 'react-router-dom';
 
 const pages = ["Add Book"];
 const settings = ["Login"];
+const userSettings = ["Home"];
 
 function ResponsiveAppBar({ user }) {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -137,7 +138,7 @@ function ResponsiveAppBar({ user }) {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar src="/static/images/avatar/"/>
+               {!user ? <Avatar/> : <Avatar src={user.avatar}/>}
               </IconButton>
             </Tooltip>
             <Menu
@@ -156,13 +157,19 @@ function ResponsiveAppBar({ user }) {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
+              {!user.id ? settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   <Typography textAlign="center" component='a'
                   sx={{ textDecoration: 'none' }}
                   href="/login">{setting}</Typography>
                 </MenuItem>
-              ))}
+              )) : userSettings.map((setting) => (
+                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center" component='a'
+                  sx={{ textDecoration: 'none' }}
+                  href="/user/home">{setting}</Typography>
+                </MenuItem> ))
+              }
             </Menu>
           </Box>
         </Toolbar>
