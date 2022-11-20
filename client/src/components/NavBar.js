@@ -16,7 +16,7 @@ import { NavLink, Link } from 'react-router-dom';
 
 const pages = ["Add Book"];
 const settings = ["Login"];
-const userSettings = ["Home"];
+const userSettings = ["Home", "Account"];
 
 function ResponsiveAppBar({ user }) {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -167,7 +167,7 @@ function ResponsiveAppBar({ user }) {
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   <Typography textAlign="center" component='a'
                   sx={{ textDecoration: 'none' }}
-                  href="/user/home">{setting}</Typography>
+                  href={setting === 'Home' ? '/user/home' : '/user/account'}>{setting}</Typography>
                 </MenuItem> ))
               }
             </Menu>

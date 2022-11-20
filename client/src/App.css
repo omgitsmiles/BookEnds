@@ -65,3 +65,15 @@ book {
   position: relative;
   justify-content: center;
 }
+
+NewBook {
+  justify-content: center;
+  display: flex;
+  position: relative;
+}
+
+.userAccount {
+  margin-top: 10%;
+  justify-content: center;
+  display: flex;
+}

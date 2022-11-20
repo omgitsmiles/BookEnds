@@ -78,7 +78,7 @@ const NewBook = ({ onSubmitAddBook }) => {
           onChange={e => setImage(e.target.value)}
         />
         <br></br>
-         <Button onClick={handleSubmit} variant="contained" endIcon={<MenuBookIcon />}>
+         <Button onClick={handleSubmit} variant="contained" sx={{ bgcolor: "#6C3429" }} endIcon={<MenuBookIcon />}>
             Send
          </Button>
             {errorMsg.error ? (

@@ -8,6 +8,7 @@ import NavBar from './components/NavBar';
 import Signup from './components/Signup';
 import NewBook from './components/NewBook';
 import UserHome from './components/UserHome';
+import UserAccount from './components/UserAccount';
 
 
 function App() {
@@ -21,8 +22,6 @@ function App() {
       }
     });
   }, []);
-
-  
 
   useEffect(() => {
     fetch("/books")
@@ -50,8 +49,9 @@ function App() {
         <Route path="/home" element={<Home books={books}/>}/>
         <Route path="/login" element={<Login setUser={setUser} user={user}/>}/>
         <Route path="/user/new" element={<Signup onSubmitNewUser={onSubmitNewUser}/>}/>
-        <Route path="/user/home" element={<UserHome user={user} setUser={setUser}/>} />
-        <Route path="/books/new" element={<NewBook onSubmitAddBook={onSubmitAddBook}/>} />
+        <Route path="/user/home" element={<UserHome user={user} setUser={setUser}/>}/>
+        <Route path="/user/account" element={<UserAccount user={user} setUser={setUser}/>}/>
+        <Route path="/books/new" element={<NewBook onSubmitAddBook={onSubmitAddBook}/>}/>
         <Route path="/books/:id" element={<Book user={user}/>}/>
       </Routes>
     </div>
