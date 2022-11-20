@@ -7,7 +7,7 @@ import Rating from '@mui/material/Rating';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const UserBooks = ({ book, user, reviews, setReviews }) => {
   // const { reviews } = user
@@ -77,7 +77,7 @@ const UserBooks = ({ book, user, reviews, setReviews }) => {
          <Container sx={{ py: 8 }} maxWidth="md">
           <Grid container spacing={4}>
               <Grid item key={book} xs={12} sm={6} md={4}>
-                <Card
+                <Card className="card"
                   sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
                 >
                   <CardMedia

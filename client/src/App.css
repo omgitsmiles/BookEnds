@@ -1,6 +1,6 @@
-/* .App {
+.App {
   text-align: center;
-} */
+}
 
 .App-logo {
   height: 40vmin;
@@ -76,4 +76,12 @@ book {
   margin-top: 10%;
   justify-content: center;
   display: flex;
+}
+
+.card {
+  font-size: 2vw;
+  text-align: center;
+  padding: 1rem;
+  flex-direction: column;
+  display: inline-block;
 }

@@ -49,10 +49,12 @@ export default function Login({ setUser }) {
     })
     .then(r => {
         if (r.ok) {
-            r.json().then(user => setUser(user))
-            navigate("/user/home")
+            r.json()
+            .then(user => setUser(user))
+            navigate("/user/account")
         } else {
-            r.json().then(e => setError(e.error))
+            r.json()
+            .then(e => setError(e.error))
         }
     })
   };

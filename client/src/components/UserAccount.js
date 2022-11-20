@@ -9,9 +9,12 @@ import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 import EditIcon from '@mui/icons-material/Edit';
 import Collapse from '@mui/material/Collapse';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 import IconButton from '@mui/material/IconButton';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { useNavigate } from 'react-router-dom';
 
 // const ExpandMore = styled((props) => {
 //     const { expand, ...other } = props;
@@ -26,10 +29,13 @@ import Button from '@mui/material/Button';
 
 
 const UserAccount = ({ user, setUser }) => {
+    const [open, setOpen] = useState(false)
     const [quote, setQuote] = useState("")
     const [avatar, setAvatar] = useState("")
+    const [error, setError] = useState([])
     const [password, setPassword] = useState("")
     const [expanded, setExpanded] = useState(false);
+    const navigate = useNavigate()
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -44,25 +50,47 @@ const UserAccount = ({ user, setUser }) => {
         },
         body: JSON.stringify(updateUser)
     })
-    .then(r => r.json())
-    .then(updatedUser => setUser(updatedUser))
-    alert("Updated!")
+    .then(r => {
+        if (r.ok) {
+            r.json()
+            .then(user => setUser(user))
+            alert("Updated!")
+        } else {
+            r.json()
+            .then(err => setError(err))
+            setOpen(true)
+        }
+    })
   }
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  };
+
+  const handleDelete = () => {
+    fetch("/logout", {
+        method: "DELETE"
+    })
+    .then(r => {
+        if (r.ok) {
+        setUser({username: "", books: [], reviews: []})
+        } 
+    })
+    navigate("/login")
+}
 
   return (
     <div className="userAccount">
         <Card sx={{ maxWidth: 345 }}>
       <CardHeader
-        avatar={
-          <Avatar aria-label="recipe">
-            {user.username.slice(0, 6)}
-          </Avatar>
-        }
-        action={
-          <IconButton aria-label="settings">
-            {/* <MoreVertIcon /> */}
-          </IconButton>
-        }
+        // avatar={
+        //   <Avatar aria-label="recipe">
+        //     {user.username}
+        //   </Avatar>
+        // }
         title={user.username}
         subheader={user.email}
       />
@@ -70,12 +98,18 @@ const UserAccount = ({ user, setUser }) => {
         component="img"
         height="194"
         image={user.avatar}
-        alt="Paella dish"
+        alt={user.username}
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
           {user.quote}
         </Typography>
+        <Typography variant="body2" color="text.secondary">
+         Books read: {user.books.length}
+        </Typography>
+        <Button variant="body2" color="text.secondary" onClick={handleDelete}>
+            LOGOUT
+        </Button>
       </CardContent>
       <EditIcon
           expand={expanded}
@@ -118,6 +152,20 @@ const UserAccount = ({ user, setUser }) => {
           </div>
          <div>
          <Button variant="contained" sx={{ bgcolor: "#6C3429" }} onClick={handleUpdate}>Submit</Button>
+         </div>
+         <div>
+         {error.errors ? (
+                <div>
+                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+                        ERROR!
+                    {error.errors.map(err => (
+                        <strong key={err}><div>{err}</div></strong>
+                    ))}
+                    </Alert>
+                </Snackbar>
+                </div>
+            ) : null}
          </div>
         </CardContent>
       </Collapse>

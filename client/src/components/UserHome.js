@@ -32,8 +32,10 @@ const UserHome = ({ user, setUser }) => {
 
     return (
             <div>
-            Welcome {username}
-            <Button onClick={handleDelete}>Logout</Button>
+            <strong>Welcome {username}</strong> 
+            <div>
+                <Button onClick={handleDelete} variant="body2" color="text.secondary">Logout</Button>
+            </div>
             <br></br>
             MyBooks:
             {renderBooks}

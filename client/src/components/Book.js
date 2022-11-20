@@ -13,6 +13,7 @@ import { useParams } from 'react-router-dom';
 const Book = ({ user }) => {
     const {id} = useParams()
     const [book, setBook] = useState({ reviews: [] })
+    const [error, setError] = useState([])
     const [newReview, setNewReview] = useState("")
     const [rating, setRating] = useState(0)
     const { reviews, title, book_img, description, users } = book
@@ -32,9 +33,16 @@ const Book = ({ user }) => {
         },
         body: JSON.stringify(writtenReview)
       })
-      .then(r => r.json())
-      .then(newReview => console.log(newReview))
-    }
+      .then(r => {
+      if (r.ok) {
+        r.json()
+        .then(data => console.log(data))
+      } else {
+        r.json()
+        .then(err => setError(err))
+      }
+    })
+  }
 
   return (
     <div>
@@ -68,7 +76,7 @@ const Book = ({ user }) => {
               <Typography component="legend"><strong>Review: {reviews.map(r => (
                 <div key={r.id}>"{r.review}" - {users.map((user => user.id === r.user_id ? user.username : null))}</div>
                 ))}</strong></Typography>
-                {user ? <>
+                {user.id ? <>
                 <br></br>
                <strong>Write your review:</strong><form>
                 <br></br>

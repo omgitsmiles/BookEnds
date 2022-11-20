@@ -76,12 +76,14 @@ const NewBook = ({ onSubmitAddBook }) => {
           variant="filled"
           onChange={e => setGenre(e.target.value)}
         />
+        <div>
         <TextField
           id="filled-helperText"
           label="Description"
           variant="filled"
           onChange={e => setDescription(e.target.value)}
-        />
+          />
+        </div>
         <br></br>
         <TextField
           id="filled-helperText"
@@ -98,6 +100,7 @@ const NewBook = ({ onSubmitAddBook }) => {
                 <div>
                 <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
                     <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+                        ERROR!
                     {errorMsg.errors.map(err => (
                         <strong key={err}><div>{err}</div></strong>
                     ))}
