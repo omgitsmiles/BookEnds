@@ -26,12 +26,8 @@ const UserHome = ({ user, setUser }) => {
         navigate("/login")
     }
 
-    const onSubmitHandleNewReview = (newReview) => {
-        setReviews(newReview)
-      }
-
     const renderBooks = books.map(book => (
-        <UserBook key={book.id} onSubmitHandleNewReview={onSubmitHandleNewReview} reviews={reviews} book={book} user={user} setUser={setUser}/>
+        <UserBook key={book.id} setReviews={setReviews} reviews={reviews} book={book} user={user} setUser={setUser}/>
         ))
 
     return (

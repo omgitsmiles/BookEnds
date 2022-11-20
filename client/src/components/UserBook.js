@@ -9,7 +9,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import React, { useState } from 'react'
 
-const UserBooks = ({ book, user, reviews, onSubmitHandleNewReview, setUser }) => {
+const UserBooks = ({ book, user, reviews, setReviews }) => {
   // const { reviews } = user
   const { id, book_img, title, description } = book
   // const [ review ] = reviews
@@ -33,13 +33,11 @@ const UserBooks = ({ book, user, reviews, onSubmitHandleNewReview, setUser }) =>
         .then(r => r.json())
         .then(newReview => {
           const updatedReview = reviews.map(review => review.id === newReview.id ? newReview : review)
-          onSubmitHandleNewReview(updatedReview)
+          setReviews(updatedReview)
         })
         alert("Your review has been updated")
         setNewReview("")
     }
-    
-
     
     // function replaceReview(updatedReview){
     //  let copyRev = [...reviews]
@@ -48,9 +46,6 @@ const UserBooks = ({ book, user, reviews, onSubmitHandleNewReview, setUser }) =>
     //  console.log(copyRev)
     //  onSubmitHandleNewReview(copyRev)
     // }
-
-    
-    
 
     // user.reviews.map(rev => {
     //   const addReview = rev.id === newReview.id ? newReview : rev
@@ -73,7 +68,9 @@ const UserBooks = ({ book, user, reviews, onSubmitHandleNewReview, setUser }) =>
     fetch(`/reviews/${reviewID}`, {
       method: "DELETE"
     })
-  }
+    const filteredArray = reviews.filter(rev => rev.id !== reviewID.id)
+    setReviews(filteredArray)
+    }
 
   return (
     <div>
