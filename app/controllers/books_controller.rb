@@ -29,7 +29,7 @@ class BooksController < ApplicationController
     private
 
     def authorize 
-        render json: { error: ["Must be logged in to add a book!"] }, status: 401 unless session[:user_id]
+        render json: { errors: ["Must be logged in to add a book!"] }, status: 401 unless session[:user_id]
     end
 
     def find_book

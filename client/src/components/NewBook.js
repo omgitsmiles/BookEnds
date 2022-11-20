@@ -33,10 +33,9 @@ const NewBook = ({ onSubmitAddBook }) => {
         })
     }
 
-    console.log(errorMsg)
-
   return (
     <Box
+      className="newBook"
       component="form"
       onSubmit={handleSubmit}
       sx={{
@@ -45,19 +44,22 @@ const NewBook = ({ onSubmitAddBook }) => {
       noValidate
       autoComplete="off"
     >
+        <div>
         <TextField
           id="filled-helperText"
           label="Title"
           variant="filled"
           onChange={e => setTitle(e.target.value)}
-        />
+          />
+        </div>
+        <div>   
         <TextField
           id="filled-helperText"
           label="Author"
           variant="filled"
           onChange={e => setAuthor(e.target.value)}
-        />
-        <br></br>
+          />
+        </div>
         <TextField
           id="filled-helperText"
           label="Genre"
@@ -81,16 +83,18 @@ const NewBook = ({ onSubmitAddBook }) => {
          <Button onClick={handleSubmit} variant="contained" sx={{ bgcolor: "#6C3429" }} endIcon={<MenuBookIcon />}>
             Send
          </Button>
-            {errorMsg.error ? (
+        <div>
+            {errorMsg.errors ? (
                 <div>
                 <Alert severity="error">
                 <AlertTitle>Error</AlertTitle>
-               {errorMsg.error.map(err => (
-                     <strong key={err}>{err}</strong>
-                ))}
+               {errorMsg.errors.map(err => (
+                   <strong key={err}><div>{err}</div></strong>
+                   ))}
                 </Alert>
                 </div>
             ) : null}
+        </div>
     </Box>
   )
 }

@@ -66,10 +66,10 @@ book {
   justify-content: center;
 }
 
-NewBook {
+.newBook {
+  margin-top: 10%;
   justify-content: center;
   display: flex;
-  position: relative;
 }
 
 .userAccount {
