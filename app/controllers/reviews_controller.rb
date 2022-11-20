@@ -1,20 +1,20 @@
 class ReviewsController < ApplicationController
-    before_action :authorize, only: [:create, :update]
+    before_action :authorize
 
     def index
-        reviews = Review.all
+        user = User.find_by(id: session[:user_id])
+        reviews = user.reviews.all
         render json: reviews, status: 200
     end
 
     def create
-        user = User.find_by(id: session[:user_id])
-        review = user.reviews.create!(review_params)
+        review = find_user.reviews.create!(review_params)
         render json: review, status: 201
     end
 
     def update
-        user = User.find_by(id: session[:user_id])
-        review = user.reviews.update(review_params)
+        review = Review.find(params[:id])
+        review.update(review_params)
         render json: review, status: 202
     end
 
@@ -27,7 +27,7 @@ class ReviewsController < ApplicationController
     private
 
     def find_user
-        User.find_by(id: session[:id])
+        User.find_by(id: session[:user_id])
     end
 
     def authorize 

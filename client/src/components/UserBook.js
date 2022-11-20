@@ -9,17 +9,22 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import React, { useState } from 'react'
 
-const UserBooks = ({ book, user }) => {
-  const { reviews } = user
+const UserBooks = ({ book, user, reviews, onSubmitHandleNewReview, setUser }) => {
+  // const { reviews } = user
   const { id, book_img, title, description } = book
-  const [ review ] = reviews
-  const [rateBook, setRateBook] = useState(review.rating)
+  // const [ review ] = reviews
+  const [rateBook, setRateBook] = useState(0)
   const [toggleNewReview, setToggieNewReview] = useState(false)
   const [newReview, setNewReview] = useState("")
 
+  const reviewID = reviews.find(rev => rev.book_id === id)
+  const userReviewText = reviews.find(rev => rev.book_id === id)
+  const reviewRating = reviews.find(rev => rev.book_id === id)
+
     const handleUpdate = () => {
         const addReview = {review: newReview, rating: rateBook}
-        fetch(`/reviews/${review.id}`, {
+        console.log(reviewID.id)
+        fetch(`/reviews/${reviewID.id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type" : "application/json"
@@ -27,12 +32,22 @@ const UserBooks = ({ book, user }) => {
             body: JSON.stringify(addReview)
         })  
         .then(r => r.json())
-      // .then(rev => setUser({user.reviews[...rev.rating, rev.review]})
-      //   setNewReview("")
+        .then(newReview => {
+          const updatedReview = reviews.map(review => review.id === newReview.id ? newReview : review)
+          console.log(updatedReview)
+          onSubmitHandleNewReview(updatedReview)
+          })
+        alert("Your review has been updated")
+        setNewReview("")
     }
     
-    console.log(user.reviews)
+    
 
+    // user.reviews.map(rev => {
+    //   const addReview = rev.id === newReview.id ? newReview : rev
+    //   user.reviews = addReview
+    //   setUser({...user})
+    //   }))
 
     // const updatedReviews = user.reviews.map(rev => rev {
     //   if rev.id === addReview.id {
@@ -43,16 +58,13 @@ const UserBooks = ({ book, user }) => {
     //   }
     //   user.reviews = updatedReviews
     //   setUser({...user})
-
-   
-  // how to handle grabbing the individual review id? maybe map?
-  const handleDelete = (reviewId) => {
-    fetch(`/reviews/${reviewId}`, {
+ 
+  const handleDelete = () => {
+    const reviewID = reviews.find(rev => rev.book_id === id).id
+    fetch(`/reviews/${reviewID}`, {
       method: "DELETE"
     })
   }
-    
-  const userReviewText = reviews.find(rev => rev.book_id === book.id).review
 
   return (
     <div>
@@ -81,11 +93,11 @@ const UserBooks = ({ book, user }) => {
                     <Typography component="legend"><strong>Rate Your Book:</strong></Typography>
                     <Rating
                         name="simple-controlled"
-                        defaultValue={reviews.map(rev => rev.book_id === id ? rev.rating : null)}
+                        defaultValue={reviewRating.rating}
                         onChange={e => setRateBook(e.target.value)}
                     />
                     <Typography component="legend"><strong>Your Review:</strong></Typography>
-                    <Typography>"{userReviewText}"</Typography>
+                    <Typography>"{userReviewText.review}"</Typography>
                     <Button onClick={() => setToggieNewReview(toggle => !toggle)}>Update Your Review</Button>
                    {toggleNewReview ?  
                    <form>
@@ -95,11 +107,11 @@ const UserBooks = ({ book, user }) => {
                     label="Review"
                     multiline
                     rows={10}
-                    defaultValue={userReviewText}
+                    defaultValue={userReviewText.review}
                     onChange={(e) => setNewReview(e.target.value)}
                     /> <Button onClick={handleUpdate}>Submit</Button>
                     </form> : null}
-                    <Button onClick={() => console.log(reviews)} sx={{ justifyContent: "center" }} variant="outlined" color="error">
+                    <Button onClick={handleDelete} sx={{ justifyContent: "center" }} variant="outlined" color="error">
                       Delete Review
                     </Button>
                   </CardContent>

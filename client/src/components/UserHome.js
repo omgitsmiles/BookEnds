@@ -4,40 +4,46 @@ import UserBook from './UserBook';
 import { useNavigate } from 'react-router-dom';
 
 const UserHome = ({ user, setUser }) => {
+    const [reviews, setReviews] = useState([])
     const { username, books } = user
     const navigate = useNavigate()
 
-    console.log(user)
-    
+    useEffect(() => {
+        fetch("/reviews")
+        .then(r => r.json())
+        .then(reviewData => setReviews(reviewData.map(review => review)))
+      }, [])
+
     const handleDelete = () => {
         fetch("/logout", {
             method: "DELETE"
         })
         .then(r => {
             if (r.ok) {
-            setUser({username: "", books: [], reviews: [] })
+            setUser({username: "", books: [], reviews: []})
             }
         })
         navigate("/login")
     }
 
+    const onSubmitHandleNewReview = (newReview) => {
+        setReviews([...reviews, newReview])
+      }
+
     const renderBooks = books.map(book => (
-        <UserBook key={book.id} book={book} user={user}/>
+        <UserBook key={book.id} reviews={reviews} book={book} user={user} setUser={setUser}/>
         ))
 
-
     return (
-
-    <div>
-    Welcome {username}
-    <Button onClick={handleDelete}>Logout</Button>
-    <br></br>
-    MyBooks:
-    {renderBooks}
-    </div>
+            <div>
+            Welcome {username}
+            <Button onClick={handleDelete}>Logout</Button>
+            <br></br>
+            MyBooks:
+            {renderBooks}
+            </div>
 
     )
-
 }
 
 export default UserHome

@@ -1,5 +1,10 @@
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
+import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import React, { useState } from 'react'
 
 const NewBook = ({ onSubmitAddBook }) => {
@@ -10,8 +15,7 @@ const NewBook = ({ onSubmitAddBook }) => {
     const [image, setImage] = useState("")
     const [errorMsg, setErrorMsg] = useState([])
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
+    const handleSubmit = () => {
         const newBook = {title: title, author: author, genre: genre, description: description, book_img: image}
         fetch("/books", {
             method: "POST",
@@ -30,14 +34,51 @@ const NewBook = ({ onSubmitAddBook }) => {
     }
 
   return (
-    <div>
-        <form onSubmit={handleSubmit}>
-            <input type="text" onChange={e => setTitle(e.target.value)}></input>
-            <input type="text" onChange={e => setAuthor(e.target.value)}></input>
-            <input type="text" onChange={e => setGenre(e.target.value)}></input>
-            <input type="text" onChange={e => setDescription(e.target.value)}></input>
-            <input type="text" onChange={e => setImage(e.target.value)}></input>
-            <button>submit</button>
+    <Box
+      component="form"
+      onSubmit={handleSubmit}
+      sx={{
+        '& .MuiTextField-root': { m: 1, width: '25ch' },
+      }}
+      noValidate
+      autoComplete="off"
+    >
+        <TextField
+          id="filled-helperText"
+          label="Title"
+          variant="filled"
+          onChange={e => setTitle(e.target.value)}
+        />
+        <TextField
+          id="filled-helperText"
+          label="Author"
+          variant="filled"
+          onChange={e => setAuthor(e.target.value)}
+        />
+        <br></br>
+        <TextField
+          id="filled-helperText"
+          label="Genre"
+          variant="filled"
+          onChange={e => setGenre(e.target.value)}
+        />
+        <TextField
+          id="filled-helperText"
+          label="Description"
+          variant="filled"
+          onChange={e => setDescription(e.target.value)}
+        />
+        <br></br>
+        <TextField
+          id="filled-helperText"
+          label="Book Image"
+          variant="filled"
+          onChange={e => setImage(e.target.value)}
+        />
+        <br></br>
+         <Button onClick={handleSubmit} variant="contained" endIcon={<MenuBookIcon />}>
+            Send
+         </Button>
             {errorMsg.error ? (
                 <div>
                 <Alert severity="error">
@@ -48,8 +89,7 @@ const NewBook = ({ onSubmitAddBook }) => {
                 </Alert>
                 </div>
             ) : null}
-        </form>
-    </div>
+    </Box>
   )
 }
 

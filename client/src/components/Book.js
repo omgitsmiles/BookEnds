@@ -32,6 +32,8 @@ const Book = ({ user }) => {
         },
         body: JSON.stringify(writtenReview)
       })
+      .then(r => r.json())
+      .then(newReview => console.log(newReview))
     }
 
   return (
