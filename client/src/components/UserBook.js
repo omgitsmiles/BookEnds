@@ -92,11 +92,11 @@ const UserBooks = ({ book, reviews, setReviews }) => {
                     <Typography component="legend"><strong>Rate Your Book:</strong></Typography>
                     <Rating
                         name="simple-controlled"
-                        defaultValue={review.rating}
+                        defaultValue={review?.rating}
                         onChange={e => setRateBook(e.target.value)}
                     />
                     <Typography component="legend"><strong>Your Review:</strong></Typography>
-                    <Typography>"{review.review}"</Typography>
+                    <Typography>"{review?.review}"</Typography>
                     <Button onClick={() => setToggieNewReview(toggle => !toggle)}>Update Your Review</Button>
                    {toggleNewReview ?  
                    <form>

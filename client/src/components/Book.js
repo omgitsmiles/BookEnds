@@ -10,7 +10,7 @@ import CardMedia from '@mui/material/CardMedia';
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-const Book = ({ user }) => {
+const Book = ({ user, setUser }) => {
     const {id} = useParams()
     const [book, setBook] = useState({ reviews: [] })
     const [error, setError] = useState([])
@@ -38,6 +38,8 @@ const Book = ({ user }) => {
         r.json()
         .then(newReview => {
           setBook({...book, reviews: [...reviews, newReview]})
+          console.log(newReview)
+          setUser(user)
         })
         setNewReview("")
       } else {
@@ -47,10 +49,14 @@ const Book = ({ user }) => {
     })
   }
 
+  users?.map(user => console.log(user.id))
+  reviews?.map(r => console.log(r.user_id))
+
+
   return (
     <div>
     <Container>
-    <Grid container sx={{ justifyContent: 'center', marginTop: "5%", marginBottom: "5%" }}>
+    <Grid container sx={{ justifyContent: 'center', marginTop: "10%", marginBottom: "5%" }}>
         <Grid item key={title} xs={12} sm={6} md={4}>
           <Card
             sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>

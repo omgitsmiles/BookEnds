@@ -85,7 +85,6 @@ const NewBook = ({ onSubmitAddBook }) => {
           onChange={e => setDescription(e.target.value)}
           />
         </div>
-        <br></br>
         <TextField
           id="filled-helperText"
           label="Book Image"

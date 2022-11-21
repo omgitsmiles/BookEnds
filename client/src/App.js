@@ -48,7 +48,7 @@ function App() {
         <Route path="/user/home" element={<UserHome user={user} setUser={setUser}/>}/>
         <Route path="/user/account" element={<UserAccount user={user} setUser={setUser}/>}/>
         <Route path="/books/new" element={<NewBook user={user} onSubmitAddBook={onSubmitAddBook}/>}/>
-        <Route path="/books/:id" element={<Book user={user}/>}/>
+        <Route path="/books/:id" element={<Book user={user} setUser={setUser}/>}/>
       </Routes>
     </div>
   );
