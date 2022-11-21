@@ -71,7 +71,7 @@ export default function Login({ setUser }) {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign in

@@ -9,7 +9,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import React, { useState } from 'react'
 
-const UserBooks = ({ book, user, reviews, setReviews, setUser }) => {
+const UserBooks = ({ book, reviews, setReviews }) => {
   // const { reviews } = user
   const { id, book_img, title, description } = book
   // const [ review ] = reviews
@@ -17,13 +17,11 @@ const UserBooks = ({ book, user, reviews, setReviews, setUser }) => {
   const [toggleNewReview, setToggieNewReview] = useState(false)
   const [newReview, setNewReview] = useState("")
 
-  const reviewID = reviews.find(rev => rev.book_id === id)
-  const userReviewText = reviews.find(rev => rev.book_id === id)
-  const reviewRating = reviews.find(rev => rev.book_id === id)
+  const review = reviews.find(rev => rev.book_id === id)
 
     const handleUpdate = () => {
         const addReview = {review: newReview, rating: rateBook}
-        fetch(`/reviews/${reviewID.id}`, {
+        fetch(`/reviews/${review.id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type" : "application/json"
@@ -62,31 +60,25 @@ const UserBooks = ({ book, user, reviews, setReviews, setUser }) => {
     //   }
     //   user.reviews = updatedReviews
     //   setUser({...user})
-
-    console.log(user)
  
   const handleDelete = () => {
-    fetch(`/reviews/${reviewID.id}`, {
+    fetch(`/reviews/${review.id}`, {
       method: "DELETE"
     })
-    const filteredArray = reviews.filter(review => review.id !== reviewID.id)
+    const filteredArray = reviews.filter(review => review.id !== review.id)
     setReviews(filteredArray)
     }
 
   return (
     <div>
          <Container sx={{ py: 8 }} maxWidth="md">
-          <Grid container spacing={4}>
+          <Grid container sx={{ justifyContent: 'center' }}>
               <Grid item key={book} xs={12} sm={6} md={4}>
                 <Card className="card"
                   sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
                 >
                   <CardMedia
                     component="img"
-                    sx={{
-                      // 16:9
-                      pt: '56.25%',
-                    }}
                     image={book_img}
                     alt={title}
                   />
@@ -100,11 +92,11 @@ const UserBooks = ({ book, user, reviews, setReviews, setUser }) => {
                     <Typography component="legend"><strong>Rate Your Book:</strong></Typography>
                     <Rating
                         name="simple-controlled"
-                        defaultValue={reviewRating.rating}
+                        defaultValue={review.rating}
                         onChange={e => setRateBook(e.target.value)}
                     />
                     <Typography component="legend"><strong>Your Review:</strong></Typography>
-                    <Typography>"{userReviewText.review}"</Typography>
+                    <Typography>"{review.review}"</Typography>
                     <Button onClick={() => setToggieNewReview(toggle => !toggle)}>Update Your Review</Button>
                    {toggleNewReview ?  
                    <form>
@@ -114,7 +106,7 @@ const UserBooks = ({ book, user, reviews, setReviews, setUser }) => {
                     label="Review"
                     multiline
                     rows={10}
-                    defaultValue={userReviewText.review}
+                    defaultValue={review.review}
                     onChange={(e) => setNewReview(e.target.value)}
                     /> <Button onClick={handleUpdate}>Submit</Button>
                     </form> : null}

@@ -49,17 +49,13 @@ const Book = ({ user }) => {
 
   return (
     <div>
-    <Container sx={{ py: 8 }} maxWidth="md">
-    <Grid container spacing={4}>
+    <Container>
+    <Grid container sx={{ justifyContent: 'center', marginTop: "5%", marginBottom: "5%" }}>
         <Grid item key={title} xs={12} sm={6} md={4}>
           <Card
             sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
             <CardMedia
               component="img"
-              sx={{
-                // 16:9
-                pt: '56.25%',
-              }}
               image={book_img}
               alt={title}
             />
@@ -90,7 +86,8 @@ const Book = ({ user }) => {
                     multiline
                     rows={10}
                     onChange={(e) => setNewReview(e.target.value)}
-                    /> <Button onClick={handleNewReview}>Submit</Button>
+                    /> <br></br>
+                    <Button onClick={handleNewReview}>Submit</Button>
                     </form>
                     </> : (
                       <>

@@ -3,9 +3,8 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
-import MuiAlert, { AlertProps } from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
+import ImportContactsIcon from '@mui/icons-material/ImportContacts';
 import React, { useState } from 'react'
 
 const NewBook = ({ onSubmitAddBook }) => {
@@ -44,6 +43,7 @@ const NewBook = ({ onSubmitAddBook }) => {
       };
 
   return (
+    <div>
     <Box
       className="newBook"
       component="form"
@@ -53,7 +53,8 @@ const NewBook = ({ onSubmitAddBook }) => {
       }}
       noValidate
       autoComplete="off"
-    >
+      >
+       <h3><ImportContactsIcon></ImportContactsIcon></h3>
         <div>
         <TextField
           id="filled-helperText"
@@ -114,6 +115,7 @@ const NewBook = ({ onSubmitAddBook }) => {
                 </Snackbar>}
         </div>
     </Box>
+    </div>
   )
 }
 

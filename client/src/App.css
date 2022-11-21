@@ -44,17 +44,16 @@ nav {
   align-items: right;
 }
 
-book {
+/* book {
   float: inline-end;
   display: flex;
   position: relative;
-  justify-content: center;
-}
+} */
 
 .newBook {
   margin-top: 10%;
   justify-content: center;
-  display: flex;
+  display: grid;
 }
 
 .userAccount {
@@ -66,7 +65,6 @@ book {
 .card {
   font-size: 2vw;
   text-align: center;
-  padding: 1rem;
   flex-direction: column;
   display: inline-block;
 }

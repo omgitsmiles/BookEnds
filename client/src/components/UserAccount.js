@@ -105,7 +105,7 @@ const UserAccount = ({ user, setUser }) => {
           {user.quote}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-         Books read: {user.books.length}
+         Books reviews: {user.books.length}
         </Typography>
         <Button variant="body2" color="text.secondary" onClick={handleDelete}>
             LOGOUT

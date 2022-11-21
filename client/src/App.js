@@ -38,10 +38,6 @@ function App() {
     setUser([...user, newUser])
   }
 
-  const onSubmitNewUserBook = () => {
-    setUser([])
-  }
-
   return (
     <div className="App">
       <NavBar user={user}/>

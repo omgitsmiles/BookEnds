@@ -6,7 +6,6 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
-// import Stack from '@mui/material/Stack';
 import Rating from '@mui/material/Rating';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -82,11 +81,6 @@ export default function Album({ books }) {
                 >
                   <CardMedia
                     component="img"
-                    sx={{
-                      // 16:9 56.25%
-                      pt: '56.25%'
-                    ,
-                    }}
                     image={book.book_img}
                     alt={book.title}
                   />
@@ -99,8 +93,8 @@ export default function Album({ books }) {
                     </Typography>
                     <Rating name="read-only" value={book.reviews.map(review => review.rating)} readOnly />
                   </CardContent>
-                  <CardActions>
-                    <Button size="small" onClick={() => bookLink(book.id)}>View</Button>
+                  <CardActions sx={{ justifyConten: 'center' }}>
+                    <Button sx={{ flex: 'auto' }} size="small" onClick={() => bookLink(book.id)}>View</Button>
                   </CardActions>
                 </Card>
               </Grid>
@@ -115,7 +109,7 @@ export default function Album({ books }) {
         <Typography
           variant="subtitle1"
           align="center"
-          color="text.secondary"
+          color="text.primary"
           component="p"
         >
           a Ruby on Rails and React.js production 🤝
