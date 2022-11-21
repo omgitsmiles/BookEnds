@@ -31,7 +31,6 @@ const theme = createTheme();
 
 export default function Album({ books }) {
     const navigate = useNavigate()
-
     const bookLink = (bookid) => {
         navigate(`/books/${bookid}`);
     }
@@ -43,7 +42,6 @@ export default function Album({ books }) {
         {/* Hero unit */}
         <Box
           sx={{
-            bgcolor: 'background.paper',
             pt: 8,
             pb: 6,
           }}
