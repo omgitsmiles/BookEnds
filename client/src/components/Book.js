@@ -47,6 +47,8 @@ const Book = ({ user }) => {
     })
   }
 
+  console.log(reviews.length)
+
   return (
     <div>
     <Container sx={{ py: 8 }} maxWidth="md">
@@ -76,9 +78,9 @@ const Book = ({ user }) => {
                   value={rating}
                   onChange={(e) => setRating(e.target.value)}
               />
-              <Typography component="legend"><strong>Review: {reviews.map(r => (
+              <Typography component="legend"><strong>Review: {reviews.length > 2 ? reviews.map(r => (
                 <div key={r.id}>"{r.review}" - {users.map((user => user.id === r.user_id ? user.username : null))}</div>
-                ))}</strong></Typography>
+                )) : null}</strong></Typography>
                 {user.id ? <>
                 <br></br>
                <strong>Write your review:</strong><form>

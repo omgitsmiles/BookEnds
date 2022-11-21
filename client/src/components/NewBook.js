@@ -107,7 +107,11 @@ const NewBook = ({ onSubmitAddBook }) => {
                     </Alert>
                 </Snackbar>
                 </div>
-            ) : null}
+            ) : <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                        Your Book Has Been Added!
+                    </Alert> 
+                </Snackbar>}
         </div>
     </Box>
   )
