@@ -38,7 +38,7 @@ function ResponsiveAppBar({ user }) {
   };
 
   return (
-    <AppBar position="static" sx={{ bgcolor: "#6C3429" }}>
+    <AppBar position="fixed" top="0" sx={{ bgcolor: "#6C3429" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <LocalLibraryIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
