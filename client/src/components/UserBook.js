@@ -66,11 +66,11 @@ const UserBooks = ({ book, user, reviews, setReviews, setUser }) => {
     console.log(user)
  
   const handleDelete = () => {
-    fetch(`/books/${id}`, {
+    fetch(`/reviews/${reviewID.id}`, {
       method: "DELETE"
     })
-    const filteredArray = user.books.filter(book => book.id !== id)
-    setUser({...user, books: [filteredArray]})
+    const filteredArray = reviews.filter(review => review.id !== reviewID.id)
+    setReviews(filteredArray)
     }
 
   return (

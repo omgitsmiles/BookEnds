@@ -21,11 +21,6 @@ class BooksController < ApplicationController
         render json: book, status: 202
     end
 
-    def destroy
-        find_book.destroy
-        head :no_content
-    end
-
     private
 
     def authorize 
