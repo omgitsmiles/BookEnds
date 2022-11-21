@@ -36,7 +36,10 @@ const Book = ({ user }) => {
       .then(r => {
       if (r.ok) {
         r.json()
-        .then(data => console.log(data))
+        .then(newReview => {
+          setBook({...book, reviews: [...reviews, newReview]})
+        })
+        setNewReview("")
       } else {
         r.json()
         .then(err => setError(err))
