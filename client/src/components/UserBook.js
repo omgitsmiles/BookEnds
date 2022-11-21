@@ -7,9 +7,9 @@ import Rating from '@mui/material/Rating';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
-const UserBooks = ({ book, user, reviews, setReviews }) => {
+const UserBooks = ({ book, user, reviews, setReviews, setUser }) => {
   // const { reviews } = user
   const { id, book_img, title, description } = book
   // const [ review ] = reviews
@@ -62,14 +62,15 @@ const UserBooks = ({ book, user, reviews, setReviews }) => {
     //   }
     //   user.reviews = updatedReviews
     //   setUser({...user})
+
+    console.log(user)
  
   const handleDelete = () => {
-    const reviewID = reviews.find(rev => rev.book_id === id).id
-    fetch(`/reviews/${reviewID}`, {
+    fetch(`/books/${id}`, {
       method: "DELETE"
     })
-    const filteredArray = reviews.filter(rev => rev.id !== reviewID.id)
-    setReviews(filteredArray)
+    const filteredArray = user.books.filter(book => book.id !== id)
+    setUser({...user, books: [filteredArray]})
     }
 
   return (
