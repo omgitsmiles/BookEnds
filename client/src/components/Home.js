@@ -6,7 +6,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
-import Rating from '@mui/material/Rating';
+// import Rating from '@mui/material/Rating';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
@@ -28,11 +28,20 @@ function Copyright() {
 
 const theme = createTheme();
 
-export default function Album({ books }) {
+export default function Album({ books, user }) {
     const navigate = useNavigate()
     const bookLink = (bookid) => {
         navigate(`/books/${bookid}`);
     }
+
+    // console.log(user)
+    // console.log(books)
+
+    // const ratings = books.map(book => {
+    //   book.reviews.map(review => {
+    //     user.reviews.map(rev => rev.id !== review.id ? rev.rating : null)
+    //   })
+    // })
 
   return (
     <ThemeProvider theme={theme}>
@@ -45,31 +54,6 @@ export default function Album({ books }) {
             pb: 6,
           }}
         >
-          <Container maxWidth="sm">
-            {/* <Typography
-              component="h1"
-              variant="h2"
-              align="center"
-              color="text.primary"
-              gutterBottom
-            >
-              Album layout
-            </Typography> */}
-            {/* <Typography variant="h5" align="center" color="text.secondary" paragraph>
-              Something short and leading about the collection below—its contents,
-              the creator, etc. Make it short and sweet, but not too short so folks
-              don&apos;t simply skip over it entirely.
-            </Typography> */}
-            {/* <Stack
-              sx={{ pt: 4 }}
-              direction="row"
-              spacing={2}
-              justifyContent="center"
-            >
-              <Button variant="contained">Main call to action</Button>
-              <Button variant="outlined">Secondary action</Button>
-            </Stack> */}
-          </Container>
         </Box>
         <Container sx={{ py: 8 }} maxWidth="md">
           {/* End hero unit */}
@@ -91,9 +75,11 @@ export default function Album({ books }) {
                     <Typography>
                       {book.description}
                     </Typography>
-                    <Rating name="read-only" value={book.reviews.map(review => review.rating)} readOnly />
+                    <br></br>
+                    {/* <Typography variant="h6">Your Rating:</Typography>
+                    <Rating name="read-only" value={book.reviews.map(review => review.rating)} readOnly /> */}
                   </CardContent>
-                  <CardActions sx={{ justifyConten: 'center' }}>
+                  <CardActions sx={{ justifyContent: 'center' }}>
                     <Button sx={{ flex: 'auto' }} size="small" onClick={() => bookLink(book.id)}>View</Button>
                   </CardActions>
                 </Card>

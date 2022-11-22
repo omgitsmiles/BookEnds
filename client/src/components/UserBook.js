@@ -9,7 +9,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import React, { useState } from 'react'
 
-const UserBooks = ({ book, reviews, setReviews }) => {
+const UserBooks = ({ book, reviews, user, setUser, setReviews }) => {
   // const { reviews } = user
   const { id, book_img, title, description } = book
   // const [ review ] = reviews
@@ -17,11 +17,11 @@ const UserBooks = ({ book, reviews, setReviews }) => {
   const [toggleNewReview, setToggieNewReview] = useState(false)
   const [newReview, setNewReview] = useState("")
 
-  const review = reviews.find(rev => rev.book_id === id)
+  const singleReview = reviews.find(rev => rev.book_id === id)
 
     const handleUpdate = () => {
         const addReview = {review: newReview, rating: rateBook}
-        fetch(`/reviews/${review.id}`, {
+        fetch(`/reviews/${singleReview.id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type" : "application/json"
@@ -32,10 +32,12 @@ const UserBooks = ({ book, reviews, setReviews }) => {
         .then(newReview => {
           const updatedReview = reviews.map(review => review.id === newReview.id ? newReview : review)
           setReviews(updatedReview)
+          // setUser(user)
         })
         alert("Your review has been updated")
-        setNewReview("")
     }
+
+    console.log(user)
     
     // function replaceReview(updatedReview){
     //  let copyRev = [...reviews]
@@ -62,12 +64,14 @@ const UserBooks = ({ book, reviews, setReviews }) => {
     //   setUser({...user})
  
   const handleDelete = () => {
-    fetch(`/reviews/${review.id}`, {
+    fetch(`/reviews/${singleReview.id}`, {
       method: "DELETE"
     })
-    const filteredArray = reviews.filter(review => review.id !== review.id)
+    const filteredArray = reviews.filter(review => review.id !== singleReview.id)
     setReviews(filteredArray)
     }
+
+    console.log(reviews)
 
   return (
     <div>
@@ -92,11 +96,11 @@ const UserBooks = ({ book, reviews, setReviews }) => {
                     <Typography component="legend"><strong>Rate Your Book:</strong></Typography>
                     <Rating
                         name="simple-controlled"
-                        defaultValue={review?.rating}
+                        defaultValue={singleReview?.rating}
                         onChange={e => setRateBook(e.target.value)}
                     />
                     <Typography component="legend"><strong>Your Review:</strong></Typography>
-                    <Typography>"{review?.review}"</Typography>
+                    <Typography>"{singleReview?.review !== null ? singleReview?.review : null}"</Typography>
                     <Button onClick={() => setToggieNewReview(toggle => !toggle)}>Update Your Review</Button>
                    {toggleNewReview ?  
                    <form>
@@ -106,7 +110,7 @@ const UserBooks = ({ book, reviews, setReviews }) => {
                     label="Review"
                     multiline
                     rows={10}
-                    defaultValue={review.review}
+                    defaultValue={singleReview?.review}
                     onChange={(e) => setNewReview(e.target.value)}
                     /> <Button onClick={handleUpdate}>Submit</Button>
                     </form> : null}

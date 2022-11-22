@@ -42,7 +42,7 @@ function App() {
     <div className="App">
       <NavBar user={user}/>
       <Routes>
-        <Route path="/home" element={<Home books={books}/>}/>
+        <Route path="/home" element={<Home books={books} user={user}/>}/>
         <Route path="/login" element={<Login setUser={setUser} user={user}/>}/>
         <Route path="/user/new" element={<Signup onSubmitNewUser={onSubmitNewUser}/>}/>
         <Route path="/user/home" element={<UserHome user={user} setUser={setUser}/>}/>

@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-    before_action :authorize, only: :create
+    # before_action :authorize, only: :create
 
     def index
         books = Book.all
@@ -7,8 +7,8 @@ class BooksController < ApplicationController
     end
 
     def create
-        user = User.find_by(id: session[:user_id])
-        book = user.books.create!(book_params)
+        # user = User.find_by(id: session[:user_id])
+        book = Book.create!(book_params)
         render json: book, status: 201
     end
 

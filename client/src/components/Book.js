@@ -7,16 +7,19 @@ import Rating from '@mui/material/Rating';
 import Button from '@mui/material/Button';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 const Book = ({ user }) => {
+    const [open, setOpen] = useState(false)
     const {id} = useParams()
     const [book, setBook] = useState({ reviews: [] })
     const [error, setError] = useState([])
     const [newReview, setNewReview] = useState("")
     const [rating, setRating] = useState(0)
-    const { reviews, title, book_img, description, users } = book
+    const { reviews, title, book_img, description, users, genre } = book
 
     useEffect(() => {
         fetch(`/books/${id}`)
@@ -44,9 +47,16 @@ const Book = ({ user }) => {
         r.json()
         .then(err => setError(err))
       }
+      setOpen(true)
     })
   }
 
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  };
 
   return (
     <div>
@@ -67,15 +77,21 @@ const Book = ({ user }) => {
               <Typography>
                 {description}
               </Typography>
+              <br></br>
+              <Typography>
+                <strong>Genre: </strong>{genre}
+              </Typography>
+              <br></br>
               <Typography component="legend"><strong>Rate Your Book:</strong></Typography>
               <Rating
                   name="simple-controlled"
                   value={rating}
                   onChange={(e) => setRating(e.target.value)}
               />
+              <br></br>
               <Typography component="legend"><strong>Review: {reviews.map(r => (
-                <div key={r.id}>"{r.review !== "" ? r.review : null}" - {users.map((user => user.id === r.user_id ? user.username : null))}</div>
-                ))}</strong></Typography>
+                <div key={r.id}>"{r.review}" - {users.map((user => user.id === r.user_id ? user.username : null))}</div>
+                ))} </strong></Typography>
                 {user.id ? <>
                 <br></br>
                <strong>Write your review:</strong><form>
@@ -100,6 +116,24 @@ const Book = ({ user }) => {
           </Card>
         </Grid>
     </Grid>
+    <div>
+            {error.errors ? (
+                <div>
+                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+                        ERROR!
+                    {error.errors.map(err => (
+                        <strong key={err}><div>{err}</div></strong>
+                    ))}
+                    </Alert>
+                </Snackbar>
+                </div>
+            ) : <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                        Your Review Has Been Added!
+                    </Alert> 
+                </Snackbar>}
+        </div>
   </Container>
   </div>
   )
