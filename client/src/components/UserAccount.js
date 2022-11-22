@@ -12,18 +12,6 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 
-// const ExpandMore = styled((props) => {
-//     const { expand, ...other } = props;
-//     return <IconButton {...other} />;
-//   })(({ theme, expand }) => ({
-//     transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-//     marginLeft: 'auto',
-//     transition: theme.transitions.create('transform', {
-//       duration: theme.transitions.duration.shortest,
-//     }),
-//   }));
-
-
 const UserAccount = ({ user, setUser }) => {
     const [open, setOpen] = useState(false)
     const [quote, setQuote] = useState("")
@@ -81,11 +69,6 @@ const UserAccount = ({ user, setUser }) => {
     <div className="userAccount">
         <Card sx={{ maxWidth: 345 }}>
       <CardHeader
-        // avatar={
-        //   <Avatar aria-label="recipe">
-        //     {user.username}
-        //   </Avatar>
-        // }
         title={user.username}
         subheader={user.email}
       />

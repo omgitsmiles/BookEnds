@@ -2,8 +2,7 @@ class ReviewsController < ApplicationController
     before_action :authorize
 
     def index
-        user = User.find_by(id: session[:user_id])
-        reviews = user.reviews.all
+        reviews = find_user.reviews.all
         render json: reviews, status: 200
     end
 
@@ -14,13 +13,12 @@ class ReviewsController < ApplicationController
 
     def update
         review = Review.find(params[:id])
-        review.update(review_params)
+        review.update!(review_params)
         render json: review, status: 202
     end
 
     def destroy
-        review = Review.find(params[:id])
-        review.destroy
+        find_review.destroy
         head :no_content
     end
 
@@ -28,6 +26,10 @@ class ReviewsController < ApplicationController
 
     def find_user
         User.find_by(id: session[:user_id])
+    end
+
+    def find_review
+        Review.find(params[:id])
     end
 
     def authorize 

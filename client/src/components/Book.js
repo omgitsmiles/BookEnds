@@ -14,11 +14,11 @@ import { useParams } from 'react-router-dom';
 
 const Book = ({ user }) => {
     const [open, setOpen] = useState(false)
-    const {id} = useParams()
     const [book, setBook] = useState({ reviews: [] })
     const [error, setError] = useState([])
     const [newReview, setNewReview] = useState("")
     const [rating, setRating] = useState(0)
+    const {id} = useParams()
     const { reviews, title, book_img, description, users, genre } = book
 
     useEffect(() => {
@@ -91,7 +91,6 @@ const Book = ({ user }) => {
               <br></br>
               <Typography component="legend"><strong>Review: {reviews.map(r => (
                 <div key={r.id}>
-                  <br></br>
                     "{r.review}" - {users.map((user => user.id === r.user_id ? user.username : null))}
                 </div>
                 ))} </strong></Typography>

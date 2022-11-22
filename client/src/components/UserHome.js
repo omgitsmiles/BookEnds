@@ -5,15 +5,17 @@ import Typography from '@mui/material/Typography';
 import { useNavigate } from 'react-router-dom';
 
 const UserHome = ({ user, setUser }) => {
-    const [reviews, setReviews] = useState([{ review: "", rating: 0}])
+    const [reviews, setReviews] = useState([])
     const { username, books } = user
     const navigate = useNavigate()
 
     useEffect(() => {
         fetch("/reviews")
         .then(r => r.json())
-        .then(reviewData => setReviews(reviewData.map(review => review)))
+        .then(reviewData => setReviews(reviewData))
       }, [user])
+
+      console.log(reviews)
 
     const handleDelete = () => {
         fetch("/logout", {

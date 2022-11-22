@@ -10,9 +10,7 @@ import Button from '@mui/material/Button';
 import React, { useState } from 'react'
 
 const UserBooks = ({ book, reviews, onDeleteBookReview, books, setReviews }) => {
-  // const { reviews } = user
   const { id, book_img, title, description } = book
-  // const [ review ] = reviews
   const [rateBook, setRateBook] = useState(0)
   const [toggleNewReview, setToggieNewReview] = useState(false)
   const [newReview, setNewReview] = useState("")
@@ -35,8 +33,6 @@ const UserBooks = ({ book, reviews, onDeleteBookReview, books, setReviews }) => 
         })
         alert("Your review has been updated")
     }
-
-    console.log(books)
     
     // function replaceReview(updatedReview){
     //  let copyRev = [...reviews]
