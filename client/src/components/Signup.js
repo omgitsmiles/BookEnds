@@ -39,7 +39,7 @@ export default function SignUp({ onSubmitNewUser }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newUser = {username: name, email: email, quote: quote, password: password}
+    const newUser = {username: name, email: email, quote: quote, password: password, avatar: avatar}
     fetch("/signup", {
         method: "POST",
         headers: {

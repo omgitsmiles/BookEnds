@@ -31,9 +31,6 @@ const UserHome = ({ user, setUser }) => {
         <UserBook key={book.id} setReviews={setReviews} reviews={reviews} book={book} user={user} setUser={setUser}/>
         ))
 
-
-        console.log(reviews)
-
     return (
             <div>
                 <br></br>

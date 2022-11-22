@@ -33,7 +33,6 @@ const UserAccount = ({ user, setUser }) => {
     const [quote, setQuote] = useState("")
     const [avatar, setAvatar] = useState("")
     const [error, setError] = useState([])
-    const [password, setPassword] = useState("")
     const [expanded, setExpanded] = useState(false);
     const navigate = useNavigate()
 
@@ -42,7 +41,7 @@ const UserAccount = ({ user, setUser }) => {
   };
 
   const handleUpdate = () => {
-    const updateUser = {quote: quote, avatar: avatar, password: password}
+    const updateUser = {quote: quote, avatar: avatar}
     fetch("/update", {
         method: "PATCH",
         headers: {
@@ -138,16 +137,6 @@ const UserAccount = ({ user, setUser }) => {
           helperText="Update your avatar here"
           variant="filled"
           onChange={e => setAvatar(e.target.value)}
-          />
-          </div>
-          <div>
-          <TextField
-          id="filled-helperText"
-          label="Password"
-          type="password"
-          helperText="Enter password to update"
-          variant="filled"
-          onChange={e => setPassword(e.target.value)}
           />
           </div>
          <div>

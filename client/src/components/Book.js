@@ -10,7 +10,7 @@ import CardMedia from '@mui/material/CardMedia';
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-const Book = ({ user, setUser }) => {
+const Book = ({ user }) => {
     const {id} = useParams()
     const [book, setBook] = useState({ reviews: [] })
     const [error, setError] = useState([])
@@ -37,9 +37,7 @@ const Book = ({ user, setUser }) => {
       if (r.ok) {
         r.json()
         .then(newReview => {
-          setBook({...book, reviews: [...reviews, newReview]})
-          console.log(newReview)
-          setUser(user)
+          setBook({...book, reviews: [...reviews, newReview], users: [...users, newReview.user]})
         })
         setNewReview("")
       } else {
@@ -48,9 +46,6 @@ const Book = ({ user, setUser }) => {
       }
     })
   }
-
-  users?.map(user => console.log(user.id))
-  reviews?.map(r => console.log(r.user_id))
 
 
   return (
@@ -78,9 +73,9 @@ const Book = ({ user, setUser }) => {
                   value={rating}
                   onChange={(e) => setRating(e.target.value)}
               />
-              <Typography component="legend"><strong>Review: {reviews.review !== "" ? reviews.map(r => (
-                <div key={r.id}>"{r.review}" - {users.map((user => user.id === r.user_id ? user.username : null))}</div>
-                )) : null}</strong></Typography>
+              <Typography component="legend"><strong>Review: {reviews.map(r => (
+                <div key={r.id}>"{r.review !== "" ? r.review : null}" - {users.map((user => user.id === r.user_id ? user.username : null))}</div>
+                ))}</strong></Typography>
                 {user.id ? <>
                 <br></br>
                <strong>Write your review:</strong><form>
