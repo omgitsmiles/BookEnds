@@ -90,7 +90,10 @@ const Book = ({ user }) => {
               />
               <br></br>
               <Typography component="legend"><strong>Review: {reviews.map(r => (
-                <div key={r.id}>"{r.review}" - {users.map((user => user.id === r.user_id ? user.username : null))}</div>
+                <div key={r.id}>
+                  <br></br>
+                    "{r.review}" - {users.map((user => user.id === r.user_id ? user.username : null))}
+                </div>
                 ))} </strong></Typography>
                 {user.id ? <>
                 <br></br>

@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-    # before_action :authorize, only: :create
+    before_action :authorize, only: :create
 
     def index
         books = Book.all
@@ -16,10 +16,10 @@ class BooksController < ApplicationController
         render json: find_book, status: 200
     end
 
-    def update
-        find_book.update!(book_params)
-        render json: book, status: 202
-    end
+    # def update
+    #     find_book.update!(book_params)
+    #     render json: book, status: 202
+    # end
 
     private
 

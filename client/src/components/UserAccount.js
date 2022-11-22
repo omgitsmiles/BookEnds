@@ -33,7 +33,7 @@ const UserAccount = ({ user, setUser }) => {
     const navigate = useNavigate()
 
   const handleExpandClick = () => {
-    setExpanded(!expanded);
+    setExpanded(expanded => !expanded);
   };
 
   const handleUpdate = () => {
@@ -90,6 +90,7 @@ const UserAccount = ({ user, setUser }) => {
         subheader={user.email}
       />
       <CardMedia
+        sx={{ fitObject: "contain" }}
         component="img"
         height="194"
         image={user.avatar}

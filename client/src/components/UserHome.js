@@ -27,9 +27,14 @@ const UserHome = ({ user, setUser }) => {
         navigate("/login")
     }
 
+    const onDeleteBookReview = (newBookArray) => {
+        setUser({...user, books: newBookArray})
+    }
+
     const renderBooks = books.map(book => (
-        <UserBook key={book.id} setReviews={setReviews} reviews={reviews} book={book} user={user} setUser={setUser}/>
+        <UserBook key={book.id} setReviews={setReviews} reviews={reviews} book={book} books={books} onDeleteBookReview={onDeleteBookReview}/>
         ))
+
 
     return (
             <div>

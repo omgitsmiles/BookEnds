@@ -88,7 +88,7 @@ export default function Album({ books, user }) {
           </Grid>
         </Container>
       </main>
-      <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">
+      <Box sx={{ bgcolor: '#F0EAD6', p: 6 }} component="footer">
         <Typography variant="h6" align="center" gutterBottom>
           
         </Typography>
