@@ -14,10 +14,11 @@ import { useNavigate } from 'react-router-dom';
 
 const UserAccount = ({ user, setUser }) => {
     const [open, setOpen] = useState(false)
-    const [quote, setQuote] = useState("")
-    const [avatar, setAvatar] = useState("")
+    const [newQuote, setNewQuote] = useState("")
+    const [image, setImage] = useState("")
     const [error, setError] = useState([])
     const [expanded, setExpanded] = useState(false);
+    const { username, email, quote, avatar, books } = user
     const navigate = useNavigate()
 
   const handleExpandClick = () => {
@@ -25,7 +26,7 @@ const UserAccount = ({ user, setUser }) => {
   };
 
   const handleUpdate = () => {
-    const updateUser = {quote: quote, avatar: avatar}
+    const updateUser = {quote: newQuote, avatar: image}
     fetch("/update", {
         method: "PATCH",
         headers: {
@@ -69,29 +70,30 @@ const UserAccount = ({ user, setUser }) => {
     <div className="userAccount">
         <Card sx={{ maxWidth: 345 }}>
       <CardHeader
-        title={user.username}
-        subheader={user.email}
+        title={username}
+        subheader={email}
       />
       <CardMedia
         sx={{ fitObject: "scale-down" }}
         component="img"
         height="194"
-        image={user.avatar}
-        alt={user.username}
+        image={avatar}
+        alt={username}
       />
       <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          {user.quote}
+        <Typography variant="body2" color="text.secondary" fontStyle="italic">
+         "{quote}"
         </Typography>
+        <br></br>
         <Typography variant="body2" color="text.secondary">
-         Books reviews: {user.books.length}
+         Books reviewed: {books.length}
         </Typography>
         <Button variant="body2" color="text.secondary" onClick={handleDelete}>
-            LOGOUT
+            Logout
         </Button>
       </CardContent>
       <EditIcon
-          expand={expanded}
+          expand="false"
           onClick={handleExpandClick}
           aria-expanded={expanded}
           aria-label="show more"
@@ -107,7 +109,7 @@ const UserAccount = ({ user, setUser }) => {
           label="Quote"
           helperText="To quote or not to quote"
           variant="filled"
-          onChange={e => setQuote(e.target.value)}
+          onChange={e => setNewQuote(e.target.value)}
           />
           </div>
           <div>
@@ -116,7 +118,7 @@ const UserAccount = ({ user, setUser }) => {
           label="Avatar"
           helperText="Update your avatar here"
           variant="filled"
-          onChange={e => setAvatar(e.target.value)}
+          onChange={e => setImage(e.target.value)}
           />
           </div>
          <div>

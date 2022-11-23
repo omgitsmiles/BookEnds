@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -8,10 +10,8 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
-import { useNavigate } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 function Copyright(props) {
   return (
@@ -49,10 +49,12 @@ export default function SignUp({ onSubmitNewUser }) {
     })
     .then(r => {
         if (r.ok) {
-            r.json().then(newUser => onSubmitNewUser(newUser))
+            r.json()
+            .then(newUser => onSubmitNewUser(newUser))
             navigate("/home")
             } else {
-            r.json().then(err => setErrorsMsg(err))
+            r.json()
+            .then(err => setErrorsMsg(err))
             }
         })
     };

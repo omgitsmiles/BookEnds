@@ -29,7 +29,6 @@ function App() {
     .then(books => setBooks(books))
   }, [])
 
-
   const onSubmitAddBook = (newBook) => {
     setBooks([...books, newBook])
   }

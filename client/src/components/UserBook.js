@@ -1,3 +1,4 @@
+import React, { useState } from 'react'
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
@@ -7,13 +8,12 @@ import Rating from '@mui/material/Rating';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
-import React, { useState } from 'react'
 
 const UserBooks = ({ book, reviews, onDeleteBookReview, books, setReviews }) => {
-  const { id, book_img, title, description } = book
   const [rateBook, setRateBook] = useState(0)
   const [toggleNewReview, setToggieNewReview] = useState(false)
   const [newReview, setNewReview] = useState("")
+  const { id, book_img, title, description } = book
 
   const singleReview = reviews.find(rev => rev.book_id === id)
 
@@ -33,30 +33,6 @@ const UserBooks = ({ book, reviews, onDeleteBookReview, books, setReviews }) => 
         })
         alert("Your review has been updated")
     }
-    
-    // function replaceReview(updatedReview){
-    //  let copyRev = [...reviews]
-    //  let c2 = copyRev.filter(d => d.id !== updatedReview.id)
-    //  copyRev = [...c2, updatedReview]
-    //  console.log(copyRev)
-    //  onSubmitHandleNewReview(copyRev)
-    // }
-
-    // user.reviews.map(rev => {
-    //   const addReview = rev.id === newReview.id ? newReview : rev
-    //   user.reviews = addReview
-    //   setUser({...user})
-    //   }))
-
-    // const updatedReviews = user.reviews.map(rev => rev {
-    //   if rev.id === addReview.id {
-    //   return addReview }
-    //     else {
-    //       return rev
-    //     }
-    //   }
-    //   user.reviews = updatedReviews
-    //   setUser({...user})
  
   const handleDelete = () => {
     fetch(`/reviews/${singleReview.id}`, {
@@ -64,9 +40,9 @@ const UserBooks = ({ book, reviews, onDeleteBookReview, books, setReviews }) => 
     })
     .then(r => {
       if (r.ok) {
+        const filteredReview = reviews.filter(review => review.id !== singleReview.id)
         const filteredBook = books.filter(b => b.id !== book.id)
-        const filteredArray = reviews.filter(review => review.id !== singleReview.id)
-        setReviews(filteredArray)
+        setReviews(filteredReview)
         onDeleteBookReview(filteredBook)
       } 
     })
@@ -96,10 +72,10 @@ const UserBooks = ({ book, reviews, onDeleteBookReview, books, setReviews }) => 
                     <Rating
                         name="simple-controlled"
                         defaultValue={singleReview?.rating}
-                        onChange={e => setRateBook(e.target.value)}
+                        onChange={(e, newRating) => setRateBook(newRating)}
                     />
                     <Typography component="legend"><strong>Your Review:</strong></Typography>
-                    <Typography>"{singleReview?.review !== null ? singleReview?.review : null}"</Typography>
+                    <Typography>"{singleReview?.review}"</Typography>
                     <Button onClick={() => setToggieNewReview(toggle => !toggle)}>Update Your Review</Button>
                    {toggleNewReview ?  
                    <form>

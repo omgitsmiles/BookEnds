@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import UserBook from './UserBook';
 import Typography from '@mui/material/Typography';
-import { useNavigate } from 'react-router-dom';
 
 const UserHome = ({ user, setUser }) => {
     const [reviews, setReviews] = useState([])
@@ -14,8 +14,6 @@ const UserHome = ({ user, setUser }) => {
         .then(r => r.json())
         .then(reviewData => setReviews(reviewData))
       }, [user])
-
-      console.log(reviews)
 
     const handleDelete = () => {
         fetch("/logout", {
@@ -45,12 +43,12 @@ const UserHome = ({ user, setUser }) => {
                 <br></br>
                 <br></br>
                 <br></br>
-            <strong>Welcome {username}</strong> 
+            <strong>Welcome {username}!</strong> 
             <div>
                 <Button onClick={handleDelete} variant="body2" color="text.primary">Logout</Button>
             </div>
             <br></br>
-            <Typography sx={{ fontFamily: 'monospace', fontWeight: 700 }}>MyBooks:</Typography>
+            <Typography sx={{ fontFamily: 'monospace', fontWeight: 700 }}>My Books:</Typography>
             {renderBooks}
             </div>
 

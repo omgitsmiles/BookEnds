@@ -19,7 +19,7 @@ class ReviewsController < ApplicationController
 
     def destroy
         find_review.destroy
-        head :no_content
+        head 204
     end
 
     private

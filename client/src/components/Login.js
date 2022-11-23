@@ -1,9 +1,10 @@
+import React, { useState } from 'react';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom'
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -11,9 +12,6 @@ import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'
 
 function Copyright(props) {
 
@@ -37,8 +35,8 @@ export default function Login({ setUser }) {
     const [error, setError] = useState([])
     const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
     const user = {username: username, password: password}
     fetch("/login", {
       method: "POST",
@@ -51,7 +49,7 @@ export default function Login({ setUser }) {
         if (r.ok) {
             r.json()
             .then(user => setUser(user))
-            navigate("/user/home")
+            navigate("/user/account")
         } else {
             r.json()
             .then(e => setError(e.error))
