@@ -22,8 +22,8 @@
 
 Taking a simple idea of creating a place for users to share their books and thoughts in one place through BookEnds. After creating an account, the user has the ability of leaving a review from books that was already populated, or create a new instance of a book for others to see and review. 
 
+### Models
 ![Models](https://github.com/omgitsmiles/BookEnds/blob/main/DBDiagram.png)
-###Models
 
 - Backend built out using these three models to populate the tables using the User, Books, Review classes
 
