@@ -73,7 +73,7 @@ const UserAccount = ({ user, setUser }) => {
         subheader={user.email}
       />
       <CardMedia
-        sx={{ fitObject: "contain" }}
+        sx={{ fitObject: "scale-down" }}
         component="img"
         height="194"
         image={user.avatar}

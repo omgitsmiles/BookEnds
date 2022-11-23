@@ -14,7 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
 
 const pages = ["Add Book"];
-const settings = ["Login"];
+const settings = ["Login", "Sign Up"];
 const userSettings = ["Home", "Account"];
 
 function ResponsiveAppBar({ user }) {
@@ -135,7 +135,7 @@ function ResponsiveAppBar({ user }) {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            <Tooltip title="User">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                {!user ? <Avatar/> : <Avatar src={user.avatar}/>}
               </IconButton>
@@ -160,13 +160,13 @@ function ResponsiveAppBar({ user }) {
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   <Typography textAlign="center" component='a'
                   sx={{ textDecoration: 'none' }}
-                  href="/login">{setting}</Typography>
+                  href={setting === "Login" ? "/login" : "/user/new"}>{setting}</Typography>
                 </MenuItem>
               )) : userSettings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   <Typography textAlign="center" component='a'
                   sx={{ textDecoration: 'none' }}
-                  href={setting === 'Home' ? '/user/home' : '/user/account'}>{setting}</Typography>
+                  href={setting === "Home" ? "/user/home" : "/user/account"}>{setting}</Typography>
                 </MenuItem> ))
               }
             </Menu>
