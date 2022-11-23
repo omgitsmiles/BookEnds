@@ -13,7 +13,7 @@
 - Fork & Clone this repository
 - Run Bundle install in terminal
 - Run rails db:migrate
-- RUn rails db:seed
+- Run rails db:seed
 - Run rails server to start backend server
 - Run npm install --prefix client in seperate terminal for frontend
 - Run npm start --prefix client to start frontend server
