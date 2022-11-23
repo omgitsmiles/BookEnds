@@ -32,7 +32,7 @@ Taking a simple idea of creating a place for users to share their books and thou
 
 ### Contributors
 
-GoodReads for summaries and book images.
+GoodReads for summaries and book images
 
 ### Contact
 Paolo Alberca [Email](mailto:paolo.alberca@gmail.com) - [LinkedIn](https://www.linkedin.com/in/paolo-alberca-069384b8/)
