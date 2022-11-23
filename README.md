@@ -8,22 +8,19 @@
 - Ruby On Rails
 - Styled by Material UI
 
-## Backend
-[Repo to backend](https://github.com/omgitsmiles/creed-thoughts-back-end)
-
 ### Get started
 
-- Clone back & [backend](https://github.com/omgitsmiles/creed-thoughts-back-end)
+- Fork & Clone this repository
 - Run Bundle install in terminal
-- Run rake db:migrate
-- RUn rake db:seed
-- Run rake server to start backend server
-- Run npm install seperate terminal for frontend
-- Run npm start to start frontend server
+- Run rails db:migrate
+- RUn rails db:seed
+- Run rails server to start backend server
+- Run npm install --prefix client in seperate terminal for frontend
+- Run npm start --prefix client to start frontend server
 
-### About Creed thoughts
+### About BookEnds
 
-From the popular show The Office, we take the character Creed Bratton and replicate his Blog for the user.
+Taking a simple idea of creating a place for users to share their books and thoughts in one place through BookEnds. After creating an account, the user has the ability of leaving a review from books that was already populated, or create a new instance of a book for others to see and review. 
 
 ![Homepage](https://github.com/omgitsmiles/creed-thoughts-front-end/blob/main/CreedThoughts.jpg)
 
