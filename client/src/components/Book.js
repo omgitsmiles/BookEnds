@@ -53,8 +53,6 @@ const Book = ({ user }) => {
     })
   }
 
-  console.log(error)
-
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
