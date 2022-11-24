@@ -8,7 +8,8 @@ import ImportContactsIcon from '@mui/icons-material/ImportContacts';
 import React, { useState } from 'react'
 
 const NewBook = ({ onSubmitAddBook }) => {
-    const [open, setOpen] = useState(false)
+    const [openError, setOpenError] = useState(false)
+    const [openSuccess, setOpenSuccess] = useState(false)
     const [title, setTitle] = useState("")
     const [author, setAuthor] = useState("")
     const [genre, setGenre] = useState("")
@@ -27,11 +28,14 @@ const NewBook = ({ onSubmitAddBook }) => {
         })
         .then(r => {
             if (r.ok) {
-                r.json().then(book => onSubmitAddBook(book))
+                r.json()
+                .then(book => onSubmitAddBook(book))
+                setOpenSuccess(true)
             } else {
-                r.json().then(err => setErrorMsg(err))
+                r.json()
+                .then(err => setErrorMsg(err))
+                setOpenError(true)
                 }
-                setOpen(true)
         })
     }
 
@@ -39,7 +43,8 @@ const NewBook = ({ onSubmitAddBook }) => {
         if (reason === 'clickaway') {
           return;
         }
-        setOpen(false);
+        setOpenSuccess(false);
+        setOpenError(false);
       };
 
   return (
@@ -96,9 +101,9 @@ const NewBook = ({ onSubmitAddBook }) => {
             Send
          </Button>
         <div>
-            {errorMsg.errors ? (
+            {errorMsg.errors && openError === true ? (
                 <div>
-                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                <Snackbar open={openError} autoHideDuration={6000} onClose={handleClose}>
                     <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
                         ERROR!
                     {errorMsg.errors.map(err => (
@@ -107,7 +112,7 @@ const NewBook = ({ onSubmitAddBook }) => {
                     </Alert>
                 </Snackbar>
                 </div>
-            ) : <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+            ) : <Snackbar open={openSuccess} autoHideDuration={6000} onClose={handleClose}>
                     <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
                         Your Book Has Been Added!
                     </Alert> 

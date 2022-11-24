@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  
   resources :reviews, except: :show
   resources :books, only: [:index, :show, :create]
 

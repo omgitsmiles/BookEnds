@@ -1,3 +1,5 @@
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
@@ -9,16 +11,15 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 
 const Book = ({ user }) => {
-    const [open, setOpen] = useState(false)
+    const [openError, setOpenError] = useState(false)
+    const [openSuccess, setOpenSuccess] = useState(false)
     const [book, setBook] = useState({ reviews: [] })
     const [error, setError] = useState([])
     const [newReview, setNewReview] = useState("")
     const [rating, setRating] = useState(0)
-    const {id} = useParams()
+    const { id } = useParams()
     const { reviews, title, book_img, description, users, genre } = book
 
     useEffect(() => {
@@ -43,19 +44,23 @@ const Book = ({ user }) => {
           setBook({...book, reviews: [...reviews, newReview], users: [...users, newReview.user]})
         })
         setNewReview("")
+        setOpenSuccess(true)
       } else {
         r.json()
         .then(err => setError(err))
+        setOpenError(true)
       }
-      setOpen(true)
     })
   }
+
+  console.log(error)
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
-    setOpen(false);
+    setOpenSuccess(false);
+    setOpenError(false);
   };
 
   return (
@@ -86,7 +91,7 @@ const Book = ({ user }) => {
               <Rating
                   name="simple-controlled"
                   value={rating}
-                  onChange={(e) => setRating(e.target.value)}
+                  onChange={(e, newValue) => setRating(newValue)}
               />
               <br></br>
               <Typography component="legend"><strong>Review: {reviews.map(r => (
@@ -119,9 +124,9 @@ const Book = ({ user }) => {
         </Grid>
     </Grid>
     <div>
-            {error.errors ? (
+            {error.errors && openError === true ? (
                 <div>
-                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                <Snackbar open={openError} autoHideDuration={6000} onClose={handleClose}>
                     <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
                         ERROR!
                     {error.errors.map(err => (
@@ -130,7 +135,7 @@ const Book = ({ user }) => {
                     </Alert>
                 </Snackbar>
                 </div>
-            ) : <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+            ) : <Snackbar open={openSuccess} autoHideDuration={6000} onClose={handleClose}>
                     <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
                         Your Review Has Been Added!
                     </Alert> 

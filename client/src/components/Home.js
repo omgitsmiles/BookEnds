@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link, useNavigate } from 'react-router-dom'
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -6,12 +8,9 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
-// import Rating from '@mui/material/Rating';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { Link, useNavigate } from 'react-router-dom'
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 function Copyright() {
   return (
@@ -28,26 +27,16 @@ function Copyright() {
 
 const theme = createTheme();
 
-export default function Album({ books, user }) {
+export default function Album({ books }) {
     const navigate = useNavigate()
     const bookLink = (bookid) => {
         navigate(`/books/${bookid}`);
     }
 
-    // console.log(user)
-    // console.log(books)
-
-    // const ratings = books.map(book => {
-    //   book.reviews.map(review => {
-    //     user.reviews.map(rev => rev.id !== review.id ? rev.rating : null)
-    //   })
-    // })
-
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <main>
-        {/* Hero unit */}
         <Box
           sx={{
             pt: 8,
@@ -56,7 +45,6 @@ export default function Album({ books, user }) {
         >
         </Box>
         <Container sx={{ py: 8 }} maxWidth="md">
-          {/* End hero unit */}
           <Grid container spacing={4}>
             {books.map((book) => (
               <Grid item key={book.id} xs={12} sm={6} md={4}>
@@ -76,8 +64,6 @@ export default function Album({ books, user }) {
                       {book.description}
                     </Typography>
                     <br></br>
-                    {/* <Typography variant="h6">Your Rating:</Typography>
-                    <Rating name="read-only" value={book.reviews.map(review => review.rating)} readOnly /> */}
                   </CardContent>
                   <CardActions sx={{ justifyContent: 'center' }}>
                     <Button sx={{ flex: 'auto' }} size="small" onClick={() => bookLink(book.id)}>View</Button>
