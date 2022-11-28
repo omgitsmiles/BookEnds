@@ -18,20 +18,22 @@ function Copyright() {
       {'Copyright © '}
       <Link color="inherit" href="https://github.com/omgitsmiles">
         omgitsmiles
-      </Link>{' '}
+      </Link>
+      {' '}
       {new Date().getFullYear()}
       {'.'}
     </Typography>
   );
 }
 
+
 const theme = createTheme();
 
 export default function Album({ books }) {
-    const navigate = useNavigate()
-    const bookLink = (bookid) => {
-        navigate(`/books/${bookid}`);
-    }
+  const navigate = useNavigate()
+  const bookLink = (bookid) => {
+    navigate(`/books/${bookid}`);
+  }
 
   return (
     <ThemeProvider theme={theme}>

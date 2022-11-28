@@ -58,7 +58,6 @@ function ResponsiveAppBar({ user }) {
           >
             BookEnds
           </Typography>
-
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -99,12 +98,13 @@ function ResponsiveAppBar({ user }) {
               ))}
             </Menu>
           </Box>
+          
           <LocalLibraryIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
             component='a'
-            href='/home'
+            href="/home"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -118,12 +118,13 @@ function ResponsiveAppBar({ user }) {
           >
             BookEnds
           </Typography>
+          
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
                 key={page}
                 component='a'
-                href='/books/new'
+                href="/books/new"
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', 
                 display: 'block', 
@@ -133,9 +134,9 @@ function ResponsiveAppBar({ user }) {
               </Button>
             ))}
           </Box>
-
+          
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="User">
+            <Tooltip title={user ? user.username : "user"}>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                {!user ? <Avatar/> : <Avatar src={user.avatar}/>}
               </IconButton>
@@ -171,6 +172,7 @@ function ResponsiveAppBar({ user }) {
               }
             </Menu>
           </Box>
+          
         </Toolbar>
       </Container>
     </AppBar>

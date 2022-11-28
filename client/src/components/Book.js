@@ -20,7 +20,7 @@ const Book = ({ user }) => {
     const [newReview, setNewReview] = useState("")
     const [rating, setRating] = useState(0)
     const { id } = useParams()
-    const { reviews, title, book_img, description, users, genre } = book
+    const { reviews, title, book_img, description, users, genre, author } = book
 
     useEffect(() => {
         fetch(`/books/${id}`)
@@ -78,6 +78,13 @@ const Book = ({ user }) => {
                 {title}
               </Typography>
               <Typography>
+                <strong>Author: </strong>
+                <br></br>
+                {author}
+                <br></br>
+                <br></br>
+              </Typography>
+              <Typography>
                 {description}
               </Typography>
               <br></br>
@@ -92,11 +99,11 @@ const Book = ({ user }) => {
                   onChange={(e, newValue) => setRating(newValue)}
               />
               <br></br>
-              <Typography component="legend"><strong>Review: {reviews.map(r => (
+              <Typography component="legend">Review: {reviews.map(r => (
                 <div key={r.id}>
-                    "{r.review}" - {users.map((user => user.id === r.user_id ? user.username : null))}
+                    <i>"{r.review}"</i> - <strong>{users.map((user => user.id === r.user_id ? user.username : null))}</strong>
                 </div>
-                ))} </strong></Typography>
+                ))} </Typography>
                 {user.id ? <>
                 <br></br>
                <strong>Write your review:</strong><form>
@@ -114,14 +121,14 @@ const Book = ({ user }) => {
                     </> : (
                       <>
                         <br></br>
-                        <strong>Sign in to review this book!</strong>
+                        <Button href="/login" sx={{ color: "#6C3429" }}><strong>Sign in to review this book!</strong></Button>
                       </>
                     )}
-            </CardContent>
-          </Card>
+                </CardContent>
+              </Card>
+            </Grid>
         </Grid>
-    </Grid>
-    <div>
+        <div>
             {error.errors && openError === true ? (
                 <div>
                 <Snackbar open={openError} autoHideDuration={6000} onClose={handleClose}>

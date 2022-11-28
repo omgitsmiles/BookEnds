@@ -13,7 +13,7 @@ const UserBooks = ({ book, reviews, onDeleteBookReview, books, setReviews }) => 
   const [rateBook, setRateBook] = useState(0)
   const [toggleNewReview, setToggieNewReview] = useState(false)
   const [newReview, setNewReview] = useState("")
-  const { id, book_img, title, description } = book
+  const { id, book_img, title, description, author } = book
 
   const singleReview = reviews.find(rev => rev.book_id === id)
 
@@ -66,13 +66,19 @@ const UserBooks = ({ book, reviews, onDeleteBookReview, books, setReviews }) => 
                       {title}
                     </Typography>
                     <Typography>
+                      <strong>Author: </strong>
+                      <br></br>
+                      {author}
+                    </Typography>
+                    <Typography>
+                      <br></br>
                       {description}
                     </Typography>
                     <Typography component="legend"><strong>Rate Your Book:</strong></Typography>
                     <Rating
                         name="simple-controlled"
-                        defaultValue={singleReview?.rating}
                         onChange={(e, newRating) => setRateBook(newRating)}
+                        value={singleReview?.rating || 0}
                     />
                     <Typography component="legend"><strong>Your Review:</strong></Typography>
                     <Typography>"{singleReview?.review}"</Typography>
