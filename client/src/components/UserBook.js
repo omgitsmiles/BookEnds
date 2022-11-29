@@ -78,7 +78,7 @@ const UserBooks = ({ book, reviews, onDeleteBookReview, books, setReviews }) => 
                     <Rating
                         name="simple-controlled"
                         onChange={(e, newRating) => setRateBook(newRating)}
-                        value={singleReview?.rating || 0}
+                        defaultValue={singleReview?.rating || 0}
                     />
                     <Typography component="legend"><strong>Your Review:</strong></Typography>
                     <Typography>"{singleReview?.review}"</Typography>

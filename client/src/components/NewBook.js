@@ -52,7 +52,6 @@ const NewBook = ({ onSubmitAddBook }) => {
     <Box
       className="newBook"
       component="form"
-      onSubmit={handleSubmit}
       sx={{
         '& .MuiTextField-root': { m: 1, width: '25ch' },
       }}

@@ -57,7 +57,7 @@ export default function SignUp({ onSubmitNewUser }) {
             .then(err => setErrorsMsg(err))
             }
         })
-    };
+    }
 
   return (
     <ThemeProvider theme={theme}>
