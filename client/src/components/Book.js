@@ -28,6 +28,8 @@ const Book = ({ user }) => {
         .then(b => setBook(b))
     }, [id])
 
+    //use state to instead of params
+
     const handleNewReview = () => {
       const writtenReview = {review: newReview, rating: rating, book_id: id}
       fetch("/reviews", {

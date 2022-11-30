@@ -1,5 +1,6 @@
 class ReviewsController < ApplicationController
     before_action :authorize
+    # skip_before_action :authorize, only:  [:rating]
 
     def index
         reviews = find_user.reviews.all
@@ -12,7 +13,7 @@ class ReviewsController < ApplicationController
     end
 
     def update
-        review = Review.find(params[:id])
+        review = find_user.reviews.find(params[:id])
         review.update!(review_params)
         render json: review, status: 202
     end
@@ -21,6 +22,11 @@ class ReviewsController < ApplicationController
         find_review.destroy
         head 204
     end
+
+    # def rating
+    #     rating = Book.joins(:reviews).where("rating = ?", params[:rating])
+    #     render json: rating, status: 200
+    # end
 
     private
 
