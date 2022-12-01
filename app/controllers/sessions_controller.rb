@@ -12,18 +12,14 @@ class SessionsController < ApplicationController
     end
 
     def destroy
-        if session[:user_id]
-            session.delete :user_id
-            head :no_content
-        else
-            render json: { error: ["Not authorized"] }, status: 401
-        end
+        session.delete :user_id
+        head :no_content
     end
 
     private
 
     def authorize 
-        render json: { error: ["Must be logged in!"] }, status: 401 unless session[:user_id]
+        render json: { error: ["Not Authorized"] }, status: 401 unless session[:user_id]
     end
 
 end
