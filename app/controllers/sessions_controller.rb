@@ -23,7 +23,7 @@ class SessionsController < ApplicationController
     private
 
     def authorize 
-        render json: { error: ["Must be logged in to update!"] }, status: 401 unless session[:user_id]
+        render json: { error: ["Must be logged in!"] }, status: 401 unless session[:user_id]
     end
 
 end
