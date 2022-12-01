@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-    # authorize to prevent users through to log out -DV
     before_action :authorize, only: :destroy
 
     def create
