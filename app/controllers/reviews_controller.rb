@@ -18,12 +18,9 @@ class ReviewsController < ApplicationController
     end
 
     def destroy
-        if session[:user_id]
-            find_review.destroy
-            head 204
-        else
-            render json: { error: ["Must be logged in"] }
-        end
+       review = find_user.reviews.find(params[:id])
+       review.destroy
+       head 204
     end
 
     private
