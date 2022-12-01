@@ -23,10 +23,10 @@ class ReviewsController < ApplicationController
         head 204
     end
 
-    # def rating
-    #     rating = Book.joins(:reviews).where("rating = ?", params[:rating])
-    #     render json: rating, status: 200
-    # end
+    def rating
+        rating = Book.joins(:reviews).where("rating = ?", params[:rating])
+        render json: rating, status: 200
+    end
 
     private
 

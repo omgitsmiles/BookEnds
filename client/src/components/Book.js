@@ -12,23 +12,20 @@ import CardMedia from '@mui/material/CardMedia';
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 
-const Book = ({ user }) => {
+const Book = ({ user, books, setBooks }) => {
+    const { id } = useParams()
     const [openError, setOpenError] = useState(false)
     const [openSuccess, setOpenSuccess] = useState(false)
-    const [book, setBook] = useState({ reviews: [] })
+    const [book, setBook] = useState({ reviews: [], title: "", book_img: "", description: "", genre: "", author: "" })
     const [error, setError] = useState([])
     const [newReview, setNewReview] = useState("")
     const [rating, setRating] = useState(0)
-    const { id } = useParams()
-    const { reviews, title, book_img, description, users, genre, author } = book
+    const { title, book_img, description, reviews, genre, author } = book
 
     useEffect(() => {
-        fetch(`/books/${id}`)
-        .then(r => r.json())
-        .then(b => setBook(b))
+      const singleBook = books.find(obj => obj.id == id)
+      setBook(singleBook)
     }, [id])
-
-    //use state to instead of params
 
     const handleNewReview = () => {
       const writtenReview = {review: newReview, rating: rating, book_id: id}
@@ -43,7 +40,15 @@ const Book = ({ user }) => {
       if (r.ok) {
         r.json()
         .then(newReview => {
-          setBook({...book, reviews: [...reviews, newReview], users: [...users, newReview.user]})
+         const updateBooks = books.map(obj => {
+            if (obj.id === book.id) {
+              book.reviews.push(newReview)
+              return book
+            } else {
+              return obj
+            }
+          })
+          setBooks(updateBooks)
         })
         setNewReview("")
         setOpenSuccess(true)
@@ -103,7 +108,7 @@ const Book = ({ user }) => {
               <br></br>
               <Typography component="legend">Review: {reviews.map(r => (
                 <div key={r.id}>
-                    <i>"{r.review}"</i> - <strong>{users.map((user => user.id === r.user_id ? user.username : null))}</strong>
+                    <i>"{r.review}"</i> - <strong>{r.review_username}</strong>
                 </div>
                 ))} </Typography>
                 {user.id ? <>
@@ -149,7 +154,7 @@ const Book = ({ user }) => {
                 </Snackbar>}
         </div>
   </Container>
-  </div>
+    </div>
   )
 }
 
