@@ -1,6 +1,5 @@
 class ReviewsController < ApplicationController
     before_action :authorize
-    # skip_before_action :authorize, only:  [:rating]
 
     def index
         reviews = find_user.reviews.all
@@ -19,13 +18,12 @@ class ReviewsController < ApplicationController
     end
 
     def destroy
-        find_review.destroy
-        head 204
-    end
-
-    def rating
-        rating = Book.joins(:reviews).where("rating = ?", params[:rating])
-        render json: rating, status: 200
+        if session[:user_id]
+            find_review.destroy
+            head 204
+        else
+            render json: { error: ["Must be logged in"] }
+        end
     end
 
     private
