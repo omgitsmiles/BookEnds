@@ -34,7 +34,7 @@ class ReviewsController < ApplicationController
     end
 
     def authorize 
-        render json: { error: ["Must be logged in to write a review!"] }, status: 401 unless session[:user_id]
+        render json: { error: ["Must be logged in"] }, status: 401 unless session[:user_id]
     end
 
     def review_params
