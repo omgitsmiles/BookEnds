@@ -9,6 +9,9 @@
 # User.destroy_all
 Book.destroy_all
 Review.destroy_all
+puts "seeding user..."
+User.create(username: "omgitsmiles", password: "phase4", email: "paolo.alberca@gmail.com", quote: "if you are racist, I will attack you with the north - Abraham Lincoln - Paolo", avatar: "https://avatars.githubusercontent.com/u/91231062?v=4")
+User.create(username: "billyshakes", password: "hamlet", email: "shakespeare@globe.com", quote: "We know what we are, but know not what we may be.", avatar: "https://repository-images.githubusercontent.com/280972261/e8010c80-ca87-11ea-9963-9ed54ef20420")
 
 puts "seeding books..."
 Book.create(title: "A Tale of Two Cities", author: "Charles Dickens", genre: "Classics", description: "A Tale of Two Cities is Charles Dickens’s great historical novel, set against the violent upheaval of the French Revolution. The most famous and perhaps the most popular of his works, it compresses an event of immense complexity to the scale of a family history, with a cast of characters that includes a bloodthirsty ogress and an antihero as believably flawed as any in modern fiction.", book_img: "https://www.ruthklein.com/wp-content/uploads/2015/05/file2.jpg")

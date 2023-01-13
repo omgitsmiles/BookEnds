@@ -64,7 +64,7 @@ const UserAccount = ({ user, setUser }) => {
         } 
     })
     navigate("/login")
-}
+  }
 
   return (
     <div className="userAccount">

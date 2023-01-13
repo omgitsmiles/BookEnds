@@ -19,10 +19,10 @@ function App() {
     fetch("/me").then((r) => {
       if (r.ok) {
         r.json()
-        .then((user) => setUser(user));
+        .then((user) => setUser(user))
       }
-    });
-  }, []);
+    })
+  }, [])
 
   useEffect(() => {
     fetch("/books")
@@ -37,7 +37,6 @@ function App() {
   const onSubmitNewUser = (newUser) => {
     setUser(newUser)
   }
-
 
   return (
     <div className="App">

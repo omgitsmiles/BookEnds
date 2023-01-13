@@ -20,15 +20,15 @@ const Book = ({ user, books, setBooks }) => {
     const [error, setError] = useState([])
     const [newReview, setNewReview] = useState("")
     const [rating, setRating] = useState(0)
-    const { title, book_img, description, reviews, genre, author } = book
+    // const { title, book_img, description, reviews, genre, author } = book
 
     useEffect(() => {
-      const singleBook = books.find(obj => obj.id == id)
+      const singleBook = books.find(obj => obj.id === parseInt(id))
       setBook(singleBook)
-    }, [id])
+    }, [books, id])
 
     const handleNewReview = () => {
-      const writtenReview = {review: newReview, rating: rating, book_id: id}
+      const writtenReview = {review: newReview, rating, book_id: id}
       fetch("/reviews", {
         method: "POST",
         headers: {
@@ -72,41 +72,41 @@ const Book = ({ user, books, setBooks }) => {
     <div>
     <Container>
     <Grid container sx={{ justifyContent: 'center', marginTop: "10%", marginBottom: "5%" }}>
-        <Grid item key={title} xs={12} sm={6} md={4}>
+        <Grid item key={book?.title} xs={12} sm={6} md={4}>
           <Card
             sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
             <CardMedia
               component="img"
-              image={book_img}
-              alt={title}
+              image={book?.book_img}
+              alt={book?.title}
             />
             <CardContent sx={{ flexGrow: 1 }}>
               <Typography gutterBottom variant="h5" component="h2">
-                {title}
+                {book?.title}
               </Typography>
               <Typography>
                 <strong>Author: </strong>
                 <br></br>
-                {author}
+                {book?.author}
                 <br></br>
                 <br></br>
               </Typography>
               <Typography>
-                {description}
+                {book?.description}
               </Typography>
               <br></br>
               <Typography>
-                <strong>Genre: </strong>{genre}
+                <strong>Genre: </strong>{book?.genre}
               </Typography>
               <br></br>
               <Typography component="legend"><strong>Rate Your Book:</strong></Typography>
               <Rating
                   name="simple-controlled"
-                  value={rating}
+                  value={book?.rating}
                   onChange={(e, newValue) => setRating(newValue)}
               />
               <br></br>
-              <Typography component="legend">Review: {reviews.map(r => (
+              <Typography component="legend">Review: {book?.reviews.map(r => (
                 <div key={r.id}>
                     <i>"{r.review}"</i> - <strong>{r.review_username}</strong>
                 </div>
@@ -155,7 +155,7 @@ const Book = ({ user, books, setBooks }) => {
         </div>
   </Container>
     </div>
-  )
+    )
 }
 
 export default Book
